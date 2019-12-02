@@ -13,7 +13,7 @@ module('Unit | Model | article', function(hooks) {
 
   module('favoriting', function() {
     test('#favorite', async function(assert) {
-      const mockArticle = server.create('article', {
+      const mockArticle = this.server.create('article', {
         title: 'This is the title',
         body: 'This is the body',
       });
@@ -27,7 +27,7 @@ module('Unit | Model | article', function(hooks) {
         ],
       });
       const article = store.peekRecord('article', mockArticle.id);
-      server.post(`/articles/${mockArticle.id}/favorite`, schema => {
+      this.server.post(`/articles/${mockArticle.id}/favorite`, schema => {
         const article = schema.articles.first();
         const attrs = article.attrs;
         attrs.favorited = true;
@@ -41,7 +41,7 @@ module('Unit | Model | article', function(hooks) {
     });
 
     test('#unfavorite', async function(assert) {
-      const mockArticle = server.create('article', {
+      const mockArticle = this.server.create('article', {
         title: 'This is the title',
         body: 'This is the body',
         favorited: true,
@@ -58,7 +58,7 @@ module('Unit | Model | article', function(hooks) {
         ],
       });
       const article = store.peekRecord('article', mockArticle.id);
-      server.delete(`/articles/${mockArticle.id}/favorite`, schema => {
+      this.server.delete(`/articles/${mockArticle.id}/favorite`, schema => {
         const article = schema.articles.first();
         const attrs = article.attrs;
         attrs.favorited = false;
@@ -76,7 +76,7 @@ module('Unit | Model | article', function(hooks) {
     test('returns an array that is mapped by value from the `tagList`', function(assert) {
       assert.expect(1);
 
-      const mockArticle = server.create('article', {
+      const mockArticle = this.server.create('article', {
         title: 'This is the title',
         body: 'This is the body',
         tagList: ['foo'],
@@ -93,7 +93,7 @@ module('Unit | Model | article', function(hooks) {
     test('updates the `tagList` from an array of strings', function(assert) {
       assert.expect(2);
 
-      const mockArticle = server.create('article', {
+      const mockArticle = this.server.create('article', {
         title: 'This is the title',
         body: 'This is the body',
         tagList: ['foo'],
