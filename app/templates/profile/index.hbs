@@ -1,0 +1,7 @@
+{{#each articles key="id" as |article|}}
+  {{feed-item isLoggedIn=session.isLoggedIn article=article onFavoriteArticle=(action "favoriteArticle")}}
+{{else}}
+  <div class="article-preview">
+    No articles are here... yet.
+  </div>
+{{/each}}
