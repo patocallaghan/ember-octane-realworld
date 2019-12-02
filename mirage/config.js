@@ -217,7 +217,7 @@ export default function() {
       return new Response(422, {}, { errors: filteredErrors });
     }
 
-    return server.create('article', {
+    return this.create('article', {
       title,
       body,
       description,

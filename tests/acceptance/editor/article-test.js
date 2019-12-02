@@ -26,9 +26,9 @@ module('Acceptance | editor/article', function(hooks) {
     let article;
 
     hooks.beforeEach(function() {
-      user = server.create('user');
-      userProfile = server.schema.profiles.findBy({ username: user.username });
-      article = server.create('article', {
+      user = this.server.create('user');
+      userProfile = this.server.schema.profiles.findBy({ username: user.username });
+      article = this.server.create('article', {
         author: userProfile,
       });
     });

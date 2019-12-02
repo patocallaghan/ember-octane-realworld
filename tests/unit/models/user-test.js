@@ -7,8 +7,8 @@ module('Unit | Model | user', function(hooks) {
   setupMirage(hooks);
 
   test('#fetchFeed', async function(assert) {
-    server.createList('article', 5);
-    server.get('/articles/feed', schema => {
+    this.server.createList('article', 5);
+    this.server.get('/articles/feed', schema => {
       return {
         articles: schema.articles.all().models.map(model => model.attrs),
         articlesCount: 5,

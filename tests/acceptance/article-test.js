@@ -12,11 +12,11 @@ module('Acceptance | article', function(hooks) {
   let user;
 
   hooks.beforeEach(function() {
-    user = server.create('user', {
+    user = this.server.create('user', {
       email: 'bob@example.com',
       password: 'password123',
     });
-    server.get('/user', schema => {
+    this.server.get('/user', schema => {
       return schema.users.first();
     });
   });
@@ -24,8 +24,8 @@ module('Acceptance | article', function(hooks) {
   test('visiting /article/:slug', async function(assert) {
     assert.expect(1);
 
-    const profile = await server.create('profile');
-    const article = await server.create('article', {
+    const profile = await this.server.create('profile');
+    const article = await this.server.create('article', {
       author: profile,
     });
 
@@ -37,8 +37,8 @@ module('Acceptance | article', function(hooks) {
   test('favorite article', async function(assert) {
     assert.expect(2);
 
-    const profile = await server.create('profile');
-    const article = await server.create('article', {
+    const profile = await this.server.create('profile');
+    const article = await this.server.create('article', {
       author: profile,
       favorited: false,
     });
@@ -62,10 +62,10 @@ module('Acceptance | article', function(hooks) {
   test('follow author', async function(assert) {
     assert.expect(2);
 
-    const profile = await server.create('profile', {
+    const profile = await this.server.create('profile', {
       following: false,
     });
-    const article = await server.create('article', {
+    const article = await this.server.create('article', {
       author: profile,
       favorited: false,
     });
@@ -89,8 +89,8 @@ module('Acceptance | article', function(hooks) {
   test('edit article', async function(assert) {
     assert.expect(1);
 
-    const userProfile = await server.schema.profiles.findBy({ username: user.username });
-    const article = await server.create('article', {
+    const userProfile = await this.server.schema.profiles.findBy({ username: user.username });
+    const article = await this.server.create('article', {
       author: userProfile,
     });
 
@@ -108,8 +108,8 @@ module('Acceptance | article', function(hooks) {
   test('delete article', async function(assert) {
     assert.expect(1);
 
-    const userProfile = await server.schema.profiles.findBy({ username: user.username });
-    const article = await server.create('article', {
+    const userProfile = await this.server.schema.profiles.findBy({ username: user.username });
+    const article = await this.server.create('article', {
       author: userProfile,
     });
 
@@ -124,8 +124,8 @@ module('Acceptance | article', function(hooks) {
   test('post comment', async function(assert) {
     assert.expect(3);
 
-    const profile = await server.create('profile');
-    const article = await server.create('article', {
+    const profile = await this.server.create('profile');
+    const article = await this.server.create('article', {
       author: profile,
     });
     const message = 'foo!';
@@ -137,7 +137,7 @@ module('Acceptance | article', function(hooks) {
     await fillIn('[data-test-article-comment-textarea]', message);
     await triggerEvent('[data-test-article-comment-form]', 'submit');
 
-    const comments = server.schema.comments.where({ authorId: user.id });
+    const comments = this.server.schema.comments.where({ authorId: user.id });
     assert.equal(comments.length, 1, 'Expect a server request to save 1 comment');
 
     assert.dom('[data-test-article-comment]').exists({ count: 1 });
@@ -146,15 +146,15 @@ module('Acceptance | article', function(hooks) {
   test('delete comment', async function(assert) {
     assert.expect(2);
 
-    const profile = await server.create('profile');
-    const userProfile = await server.schema.profiles.findBy({
+    const profile = await this.server.create('profile');
+    const userProfile = await this.server.schema.profiles.findBy({
       username: user.username,
     });
-    const article = await server.create('article', {
+    const article = await this.server.create('article', {
       author: profile,
     });
 
-    await server.createList('comment', 1, {
+    await this.server.createList('comment', 1, {
       article,
       author: userProfile,
     });

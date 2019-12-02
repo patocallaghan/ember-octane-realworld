@@ -39,7 +39,7 @@ module('Unit | Serializer | profile', function(hooks) {
     const store = this.owner.lookup('service:store');
     const serializer = store.serializerFor('profile');
     const primaryModelClass = store.modelFor('profile');
-    const profile = server.create('profile').toJSON();
+    const profile = this.server.create('profile').toJSON();
     const payload = {
       profile,
     };
