@@ -22,12 +22,12 @@ module('Acceptance | settings', function(hooks) {
     let user;
 
     hooks.beforeEach(function() {
-      user = server.create('user', {
+      user = this.server.create('user', {
         email: 'bob@example.com',
         password: 'password123',
       });
 
-      server.get('/user', schema => {
+      this.server.get('/user', schema => {
         return schema.users.first();
       });
     });

@@ -18,7 +18,7 @@ module('Acceptance | profile', function(hooks) {
   test('visiting any user profile will see a link to follow the profile owner but links to login', async function(assert) {
     assert.expect(1);
 
-    const profileOwner = server.create('profile');
+    const profileOwner = this.server.create('profile');
 
     await visit(`/profile/${profileOwner.username}`);
     await click('[data-test-follow-profile-button]');
@@ -29,20 +29,20 @@ module('Acceptance | profile', function(hooks) {
   test('sees a tab navigation to articles written by and favorited by the profile owner', async function(assert) {
     assert.expect(3);
 
-    const profileOwner = server.create('profile');
-    const otherUser = server.create('profile');
+    const profileOwner = this.server.create('profile');
+    const otherUser = this.server.create('profile');
 
     /**
      * Articles written by profile owner.
      */
-    server.createList('article', 2, {
+    this.server.createList('article', 2, {
       author: profileOwner,
       favorited: false,
     });
     /**
      * Articles favorited by profile owner, not written by profile owner.
      */
-    server.createList('article', 3, {
+    this.server.createList('article', 3, {
       author: otherUser,
       favorited: true,
     });
@@ -64,11 +64,11 @@ module('Acceptance | profile', function(hooks) {
   test("clicking on an article's favorite button redirects user to login page", async function(assert) {
     assert.expect(1);
 
-    const profileOwner = server.create('profile');
+    const profileOwner = this.server.create('profile');
     /**
      * Articles written by profile owner.
      */
-    server.create('article', 1, {
+    this.server.create('article', 1, {
       author: profileOwner,
       favorited: false,
     });
@@ -86,11 +86,11 @@ module('Acceptance | profile', function(hooks) {
     let user;
 
     hooks.beforeEach(function() {
-      user = server.create('user', {
+      user = this.server.create('user', {
         email: 'bob@example.com',
         password: 'password123',
       });
-      server.get('/user', schema => {
+      this.server.get('/user', schema => {
         return schema.users.first();
       });
     });
@@ -105,7 +105,7 @@ module('Acceptance | profile', function(hooks) {
     });
 
     test('visiting another user profile sees a link to follow the profile owner', async function(assert) {
-      const otherUser = server.create('profile', { following: false });
+      const otherUser = this.server.create('profile', { following: false });
 
       await visit(`/profile/${otherUser.username}`);
       await click('[data-test-follow-profile-button]');
@@ -124,11 +124,11 @@ module('Acceptance | profile', function(hooks) {
     test('favorite an article by the user', async function(assert) {
       assert.expect(1);
 
-      const profileOwner = server.create('profile');
+      const profileOwner = this.server.create('profile');
       /**
        * Articles written by profile owner.
        */
-      const article = server.create('article', 1, {
+      const article = this.server.create('article', 1, {
         author: profileOwner,
         favorited: false,
       });

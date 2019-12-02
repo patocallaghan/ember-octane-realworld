@@ -15,7 +15,7 @@ module('Unit | Model | profile', function(hooks) {
     test('#follow', async function(assert) {
       assert.expect(2);
 
-      const mockProfile = server.create('profile', {
+      const mockProfile = this.server.create('profile', {
         following: false,
       });
       store.pushPayload({
@@ -36,7 +36,7 @@ module('Unit | Model | profile', function(hooks) {
     test('#unfollow', async function(assert) {
       assert.expect(2);
 
-      const mockProfile = server.create('profile', {
+      const mockProfile = this.server.create('profile', {
         following: true,
       });
       store.pushPayload({

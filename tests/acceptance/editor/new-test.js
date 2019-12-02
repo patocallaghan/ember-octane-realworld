@@ -22,7 +22,7 @@ module('Acceptance | editor/new', function(hooks) {
     setupLoggedInUser(hooks);
 
     hooks.beforeEach(function() {
-      server.create('user', {
+      this.server.create('user', {
         email: 'bob@example.com',
         password: 'password123',
       });

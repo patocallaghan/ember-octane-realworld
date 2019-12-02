@@ -10,7 +10,7 @@ module('Acceptance | home', function(hooks) {
   setupLoggedOutUser(hooks);
 
   test('visiting /', async function(assert) {
-    server.createList('article', 20);
+    this.server.createList('article', 20);
 
     await visit('/');
 
@@ -41,7 +41,7 @@ module('Acceptance | home', function(hooks) {
   });
 
   test('clicking a page', async function(assert) {
-    await server.createList('article', 20);
+    await this.server.createList('article', 20);
 
     await visit('/');
     await click('ul.pagination .page-item:nth-child(2) a');
@@ -65,7 +65,7 @@ module('Acceptance | home', function(hooks) {
   });
 
   test('clicking a page and tag', async function(assert) {
-    await server.createList('article', 20);
+    await this.server.createList('article', 20);
 
     await visit('/');
     await click('.sidebar .tag-list a:first-child');
@@ -82,7 +82,7 @@ module('Acceptance | home', function(hooks) {
   });
 
   test('resetting to the main list', async function(assert) {
-    await server.createList('article', 20);
+    await this.server.createList('article', 20);
 
     await visit('/?page=2&tag=emberjs');
     await click('[data-test-feed="global"]');
@@ -97,19 +97,19 @@ module('Acceptance | home', function(hooks) {
     setupLoggedInUser(hooks);
 
     hooks.beforeEach(function() {
-      server.create('user', {
+      this.server.create('user', {
         email: 'bob@example.com',
         password: 'password123',
       });
-      server.get('/user', schema => {
+      this.server.get('/user', schema => {
         return schema.users.first();
       });
     });
 
     test('Your feed', async function(assert) {
-      await server.createList('article', 20);
+      await this.server.createList('article', 20);
 
-      server.get('/articles/feed', schema => {
+      this.server.get('/articles/feed', schema => {
         return {
           articles: [schema.articles.first()],
           articlesCount: 1,
