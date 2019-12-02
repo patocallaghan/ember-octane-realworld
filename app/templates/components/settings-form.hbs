@@ -8,26 +8,36 @@
   {{/if}}
   <fieldset>
     <fieldset class="form-group">
-      {{input class="form-control" type="text" placeholder="URL of profile picture" data-test-settings-form-input-image=""
-        value=image input=(action "change" "image")}}
+      <Input class="form-control" @type="text" placeholder="URL of profile picture" data-test-settings-form-input-image
+        @value={{image}} @input={{action "change" "image"}} />
     </fieldset>
     <fieldset class="form-group">
-      {{input class="form-control form-control-lg" type="text" placeholder="Your Name" data-test-settings-form-input-username=""
-        value=username input=(action "change" "username")}}
+      <Input class="form-control form-control-lg" @type="text" placeholder="Your Name"
+        data-test-settings-form-input-username @value={{username}} @input={{action "change" "username"}} />
+    </fieldset>
+    {{! template-lint-disable block-indentation }}
+    <fieldset class="form-group">
+      <Textarea class="form-control form-control-lg" @rows="8" placeholder="Short bio about you"
+        data-test-settings-form-input-bio @value={{bio}} @input={{action "change" "bio"}} />
+      </fieldset>
+    <fieldset class="form-group">
+      <Input
+        @type="text"
+        placeholder="Email"
+        data-test-settings-form-input-email
+        @value={{email}}
+        @input={{action "change" "email"}}
+      />
     </fieldset>
     <fieldset class="form-group">
-      {{! template-lint-disable block-indentation }}
-      {{textarea class="form-control form-control-lg" rows="8" placeholder="Short bio about you"
-        data-test-settings-form-input-bio="" value=bio input=(action "change" "bio")}}
-    </fieldset>
-    <fieldset class="form-group">
-      {{input class="form-control form-control-lg" type="text" placeholder="Email" data-test-settings-form-input-email=""
-        value=email input=(action "change" "email")}}
-    </fieldset>
-    <fieldset class="form-group">
-      {{input class="form-control form-control-lg" type="password" placeholder="Password"
-        data-test-settings-form-input-password="" value=password
-        input=(action "change" "password")}}
+      <Input
+        class="form-control form-control-lg"
+        @type="password"
+        placeholder="Password"
+        data-test-settings-form-input-password
+        @value={{password}}
+        @input={{action "change" "password"}}
+      />
     </fieldset>
     <button type="submit" class="btn btn-lg btn-primary pull-xs-right" data-test-settings-form-submit-button
       disabled={{disableSubmit}}>

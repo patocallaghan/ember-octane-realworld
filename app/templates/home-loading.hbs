@@ -12,21 +12,21 @@
           <ul class="nav nav-pills outline-active">
             {{#if session.isLoggedIn}}
               <li class="nav-item">
-                {{#link-to "home" (query-params feed="your" page=1 tag=null) class=(concat "nav-link " (unless feed disabled)) data-test-feed="your"}}
+                <LinkTo @route="home" @query={{hash feed="your" page=1 tag=null}} class={{concat "nav-link " (unless feed disabled)}} data-test-feed="your">
                   Your Feed
-                {{/link-to}}
+                </LinkTo>
               </li>
             {{/if}}
             <li class="nav-item">
-              {{#link-to "home" (query-params feed=null page=1 tag=null) class="nav-link" data-test-feed="global"}}
+              <LinkTo @route="home" @query={{hash feed=null page=1 tag=null}} class="nav-link" data-test-feed="global">
                 Global Feed
-              {{/link-to}}
+              </LinkTo>
             </li>
             {{#if tag}}
               <li class="nav-item">
-                {{#link-to "home" (query-params feed=null page=1 tag=tag) class="nav-link" data-test-feed=tag}}
+                <LinkTo @route="home" @query={{hash feed=null page=1 tag=tag}} class="nav-link" data-test-feed={{tag}}>
                   {{tag}}
-                {{/link-to}}
+                </LinkTo>
               </li>
             {{/if}}
           </ul>

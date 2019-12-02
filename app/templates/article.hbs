@@ -2,14 +2,9 @@
   <div class="banner">
     <div class="container">
       <h1>{{model.title}}</h1>
-      {{article-meta
-        article=model 
-        isLoggedIn=session.isLoggedIn
-        canEdit=(eq session.user.username model.author.username)
-        onFavoriteArticle=(action "favoriteArticle") 
-        onDeleteArticle=(action "deleteArticle")
-        onFollowAuthor=(action "followAuthor")
-      }}
+      <ArticleMeta @article={{model}} @isLoggedIn={{session.isLoggedIn}}
+        @canEdit={{eq session.user.username model.author.username}} @onFavoriteArticle={{action "favoriteArticle"}}
+        @onDeleteArticle={{action "deleteArticle"}} @onFollowAuthor={{action "followAuthor"}} />
     </div>
   </div>
   <div class="container page">
@@ -25,23 +20,20 @@
     </div>
     <hr>
     <div class="article-actions">
-      {{article-meta
-        article=model 
-        isLoggedIn=session.isLoggedIn
-        canEdit=(eq session.user.username model.author.username)
-        onFavoriteArticle=(action "favoriteArticle") 
-        onDeleteArticle=(action "deleteArticle")
-        onFollowAuthor=(action "followAuthor")
-      }}
+      <ArticleMeta @article={{model}} @isLoggedIn={{session.isLoggedIn}}
+        @canEdit={{eq session.user.username model.author.username}} @onFavoriteArticle={{action "favoriteArticle"}}
+        @onDeleteArticle={{action "deleteArticle"}} @onFollowAuthor={{action "followAuthor"}} />
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
         {{#if session.isLoggedIn}}
           <form class="card comment-form" data-test-article-comment-form
             {{action "createComment" model newComment on="submit" }}>
+            {{! template-lint-disable block-indentation }}
             <div class="card-block">
-              {{textarea class="form-control" placeholder="Write a comment..." rows="3" value=newComment data-test-article-comment-textarea=""}}
-            </div>
+              <Textarea class="form-control" placeholder="Write a comment..." @rows="3" @value={{newComment}}
+                data-test-article-comment-textarea />
+              </div>
             <div class="card-footer">
               <img class="comment-author-img" alt="">
               <button class="btn btn-sm btn-primary" type="submit" disabled={{not isNewCommentValid}}>
@@ -51,7 +43,7 @@
           </form>
         {{else}}
           <p>
-            {{#link-to "login"}}Sign in{{/link-to}} or {{#link-to "register"}}sign up{{/link-to}} to add comments on
+            <LinkTo @route="login">Sign in</LinkTo> or <LinkTo @route="register">sign up</LinkTo> to add comments on
             this article.
           </p>
         {{/if}}
@@ -61,11 +53,11 @@
               <p class="card-text">{{comment.body}}</p>
             </div>
             <div class="card-footer">
-              {{#link-to "profile" comment.author.id class="comment-author"}}
+              <LinkTo @route="profile" @model={{comment.author.id}} class="comment-author">
                 <img src={{comment.author.image}} class="comment-author-img" alt="comment author image">
                 &nbsp;
                 {{comment.author.username}}
-              {{/link-to}}
+              </LinkTo>
               <span class="date-posted">{{comment.createdAt}}</span>
               {{#if (eq session.user.username comment.author.username)}}
                 <span class="mod-options">

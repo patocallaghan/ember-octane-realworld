@@ -12,40 +12,38 @@
           <ul class="nav nav-pills outline-active">
             {{#if session.isLoggedIn}}
               <li class="nav-item">
-                {{#link-to "home" (query-params feed="your" page=1 tag=null) class=(concat "nav-link " (unless feed disabled)) data-test-feed="your"}}
+                <LinkTo @route="home" @query={{hash feed="your" page=1 tag=null}}
+                  class={{concat "nav-link " (unless feed disabled)}} data-test-feed="your">
                   Your Feed
-                {{/link-to}}
+                </LinkTo>
               </li>
             {{/if}}
             <li class="nav-item">
-              {{#link-to "home" (query-params feed=null page=1 tag=null) class="nav-link" data-test-feed="global"}}
+              <LinkTo @route="home" @query={{hash feed=null page=1 tag=null}} class="nav-link" data-test-feed="global">
                 Global Feed
-              {{/link-to}}
+              </LinkTo>
             </li>
             {{#if tag}}
               <li class="nav-item">
-                {{#link-to "home" (query-params feed=null page=1 tag=tag) class="nav-link" data-test-feed=tag}}
+                <LinkTo @route="home" @query={{hash feed=null page=1 tag=tag}} class="nav-link" data-test-feed={{tag}}>
                   {{tag}}
-                {{/link-to}}
+                </LinkTo>
               </li>
             {{/if}}
           </ul>
         </div>
         {{#each model.articles as |article|}}
-          {{feed-item isLoggedIn=session.isLoggedIn article=article onFavoriteArticle=(action "favoriteArticle")}}
+          <FeedItem @isLoggedIn={{session.isLoggedIn}} @article={{article}}
+            @onFavoriteArticle={{action "favoriteArticle"}} />
         {{/each}}
         <nav>
-          {{pagination-list
-            current=page
-            total=model.meta.articlesCount
-            pageSize=model.meta.pageSize
-            existingParams=(hash feed=feed tag=tag)
-          }}
+          <PaginationList @current={{page}} @total={{model.meta.articlesCount}} @pageSize={{model.meta.pageSize}}
+            @existingParams={{hash feed=feed tag=tag}} />
         </nav>
       </div>
       <div class="col-md-3">
         <div class="sidebar">
-          {{tag-list}}
+          <TagList />
         </div>
       </div>
     </div>

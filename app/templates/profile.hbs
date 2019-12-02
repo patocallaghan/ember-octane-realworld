@@ -10,18 +10,18 @@
           </p>
           {{#if session.isLoggedIn}}
             {{#if (eq model.username session.user.username)}}
-              {{#link-to "settings" class="btn btn-sm btn-outline-secondary action-btn" data-test-edit-profile-button=""}}
+              <LinkTo @route="settings" class="btn btn-sm btn-outline-secondary action-btn" data-test-edit-profile-button>
                 <i class="ion-gear-a"></i> Edit Profile Settings
-              {{/link-to}}
+              </LinkTo>
             {{else}}
               {{#follow-user-button data-test-follow-profile-button disabled=waitingForFollowing class="btn-outline-secondary action-btn" onClick=(perform (if model.following unFollowUser followUser) model)}}
                 {{if model.following "Unfollow" "Follow"}} {{model.username}}
               {{/follow-user-button}}
             {{/if}}
           {{else}}
-            {{#link-to "login" class="btn btn-sm btn-outline-secondary action-btn" data-test-follow-profile-button=""}}
+            <LinkTo @route="login" class="btn btn-sm btn-outline-secondary action-btn" data-test-follow-profile-button>
               <i class="ion-plus-round"></i> &nbsp; {{if model.following "Unfollow" "Follow"}} {{model.username}}
-            {{/link-to}}
+            </LinkTo>
           {{/if}}
         </div>
       </div>
@@ -33,14 +33,14 @@
         <div class="articles-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              {{#link-to "profile.index" class="nav-link" data-test-profile-nav-link="my-articles"}}
+              <LinkTo @route="profile.index" class="nav-link" data-test-profile-nav-link="my-articles">
                 My Articles
-              {{/link-to}}
+              </LinkTo>
             </li>
             <li class="nav-item">
-              {{#link-to "profile.favorites" class="nav-link" data-test-profile-nav-link="favorite-articles"}}
+              <LinkTo @route="profile.favorites" class="nav-link" data-test-profile-nav-link="favorite-articles">
                 Favorited Articles
-              {{/link-to}}
+              </LinkTo>
             </li>
           </ul>
         </div>
