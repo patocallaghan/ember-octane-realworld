@@ -16,7 +16,7 @@ module('Integration | Component | follow-user-button', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{follow-user-button onClick=onClick}}
+      <FollowUserButton @onClick={{this.onClick}} />
     `);
 
     await click('[data-test-follow-author-button]');
@@ -37,9 +37,9 @@ module('Integration | Component | follow-user-button', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#follow-user-button class=classNames onClick=onClick}}
+      <FollowUserButton class={{classNames}} @onClick={{this.onClick}}>
         template block text
-      {{/follow-user-button}}
+      </FollowUserButton>
     `);
 
     const buttonAssertion = assert.dom('[data-test-follow-author-button]');

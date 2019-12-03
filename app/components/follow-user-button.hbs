@@ -1,1 +1,4 @@
-<i class="ion-plus-round"></i> &nbsp; {{yield}}
+<button class="btn btn-sm {{if @following "btn-secondary" "btn-outline-secondary"}}" data-test-follow-author-button
+  {{on "click" @onClick}} ...attributes>
+  <i class="ion-plus-round"></i> &nbsp; {{yield}}
+</button>

@@ -15,7 +15,7 @@ module('Integration | Component | settings-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{settings-form image="image?" onChange=onChange}}`);
+    await render(hbs`<SettingsForm @image="image?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-settings-form-input-image]').hasValue('image?');
 
@@ -31,7 +31,7 @@ module('Integration | Component | settings-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{settings-form username="username?" onChange=onChange}}`);
+    await render(hbs`<SettingsForm @username="username?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-settings-form-input-username]').hasValue('username?');
 
@@ -47,7 +47,7 @@ module('Integration | Component | settings-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{settings-form bio="bio?" onChange=onChange}}`);
+    await render(hbs`<SettingsForm @bio="bio?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-settings-form-input-bio]').hasValue('bio?');
 
@@ -63,7 +63,7 @@ module('Integration | Component | settings-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{settings-form email="email?" onChange=onChange}}`);
+    await render(hbs`<SettingsForm @email="email?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-settings-form-input-email]').hasValue('email?');
 
@@ -79,7 +79,7 @@ module('Integration | Component | settings-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{settings-form password="password?" onChange=onChange}}`);
+    await render(hbs`<SettingsForm @password="password?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-settings-form-input-password]').hasValue('password?');
 
@@ -95,7 +95,7 @@ module('Integration | Component | settings-form', function(hooks) {
     this.set('onSubmit', onSubmit);
     this.set('disableSubmit', true);
 
-    await render(hbs`{{settings-form onSubmit=onSubmit disableSubmit=disableSubmit}}`);
+    await render(hbs`<SettingsForm @onSubmit={{this.onSubmit}} @disableSubmit={{this.disableSubmit}} />`);
 
     assert
       .dom('[data-test-settings-form-submit-button]')
@@ -133,7 +133,7 @@ module('Integration | Component | settings-form', function(hooks) {
     const errors = [];
     this.set('errors', errors);
 
-    await render(hbs`{{settings-form errors=errors}}`);
+    await render(hbs`<SettingsForm @errors={{this.errors}} />`);
 
     assert.dom('[data-test-settings-form-error-item]').doesNotExist();
 

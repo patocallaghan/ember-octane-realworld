@@ -28,7 +28,7 @@ module('Integration | Component | article-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{article-form title="title?" onChange=onChange}}`);
+    await render(hbs`<ArticleForm @title="title?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-article-form-input-title]').hasValue('title?');
 
@@ -44,7 +44,7 @@ module('Integration | Component | article-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{article-form description="description?" onChange=onChange}}`);
+    await render(hbs`<ArticleForm @description="description?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-article-form-input-description]').hasValue('description?');
 
@@ -63,7 +63,7 @@ module('Integration | Component | article-form', function(hooks) {
 
     this.set('onChange', onChange);
 
-    await render(hbs`{{article-form body="body?" onChange=onChange}}`);
+    await render(hbs`<ArticleForm @body="body?" @onChange={{this.onChange}} />`);
 
     assert.dom('[data-test-article-form-input-body]').hasValue('body?');
 
@@ -82,7 +82,7 @@ module('Integration | Component | article-form', function(hooks) {
       this.set('onChange', onChange);
       this.set('tags', tags);
 
-      await render(hbs`{{article-form tags=tags onChange=onChange}}`);
+      await render(hbs`<ArticleForm @tags={{this.tags}} @onChange={{this.onChange}} />`);
 
       assert.dom('[data-test-article-form-input-tags]').hasNoValue();
 
@@ -107,7 +107,7 @@ module('Integration | Component | article-form', function(hooks) {
       this.set('onChange', onChange);
       this.set('tags', tags);
 
-      await render(hbs`{{article-form tags=tags onChange=onChange}}`);
+      await render(hbs`<ArticleForm @tags={{this.tags}} @onChange={{this.onChange}} />`);
 
       assert.dom('[data-test-article-form-tag-remove-button]').exists({ count: 1 });
 
@@ -126,7 +126,7 @@ module('Integration | Component | article-form', function(hooks) {
 
     this.set('isNew', true);
 
-    await render(hbs`{{article-form isNew=isNew}}`);
+    await render(hbs`<ArticleForm @isNew={{this.isNew}} />`);
     assert
       .dom('[data-test-article-form-submit-button]')
       .hasText('Create Post', 'Show "Create Post` when `isNew` property is true');
@@ -146,7 +146,7 @@ module('Integration | Component | article-form', function(hooks) {
     this.set('onSubmit', onSubmit);
     this.set('disableSubmit', true);
 
-    await render(hbs`{{article-form onSubmit=onSubmit disableSubmit=disableSubmit}}`);
+    await render(hbs`<ArticleForm @onSubmit={{this.onSubmit}} @disableSubmit={{this.disableSubmit}} />`);
 
     assert
       .dom('[data-test-article-form-submit-button]')
@@ -176,13 +176,14 @@ module('Integration | Component | article-form', function(hooks) {
       '`onSubmit` should not be called when submit button is disabled.',
     );
   });
+
   test('errors are displayed when `errors` array is populated', async function(assert) {
     assert.expect(4);
 
     const errors = [];
     this.set('errors', errors);
 
-    await render(hbs`{{article-form errors=errors}}`);
+    await render(hbs`<ArticleForm @errors={{this.errors}} />`);
 
     assert.dom('[data-test-article-form-error-item]').doesNotExist();
 

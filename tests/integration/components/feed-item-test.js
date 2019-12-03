@@ -26,7 +26,7 @@ module('Integration | Component | feed item', function(hooks) {
     };
 
     this.set('article', article);
-    await render(hbs`{{feed-item article=article }}`);
+    await render(hbs`<FeedItem @article={{this.article}} />`);
 
     assert
       .dom('[data-test-article-author-image]')

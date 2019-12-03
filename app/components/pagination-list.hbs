@@ -1,10 +1,12 @@
-<ul class="pagination">
-  {{#each pages as |page|}}
-    <li class="page-item {{if (eq current page) "active"}}" data-test-page-item>
-      <LinkTo @route="home" @query={{hash feed=existingParams.feed tag=existingParams.tag page=page}} class="page-link"
-        data-test-page-item-link={{page}}>
-        {{page}}
-      </LinkTo>
-    </li>
-  {{/each}}
-</ul>
+<nav ...attributes>
+  <ul class="pagination">
+    {{#each this.pages as |page|}}
+      <li class="page-item {{if (eq @current page) "active"}}" data-test-page-item>
+        <LinkTo @route="home" @query={{hash feed=@existingParams.feed tag=@existingParams.tag page=page}}
+          class="page-link" data-test-page-item-link={{page}}>
+          {{page}}
+        </LinkTo>
+      </li>
+    {{/each}}
+  </ul>
+</nav>

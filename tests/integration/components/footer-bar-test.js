@@ -7,7 +7,7 @@ module('Integration | Component | footer-bar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{footer-bar}}`);
+    await render(hbs`<FooterBar />`);
 
     assert.dom('footer').exists();
   });

@@ -1,13 +1,11 @@
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  tagName: 'nav',
-  pages: computed('total', 'pageSize', function() {
-    if (!this.total || this.total <= this.pageSize) {
+export default class PaginationList extends Component {
+  get pages() {
+    if (!this.args.total || this.args.total <= this.args.pageSize) {
       return [];
     }
-    const pages = Math.ceil(this.total / this.pageSize);
+    const pages = Math.ceil(this.args.total / this.args.pageSize);
     return Array.from(Array(pages).keys()).map(num => ++num);
-  }),
-});
+  }
+}

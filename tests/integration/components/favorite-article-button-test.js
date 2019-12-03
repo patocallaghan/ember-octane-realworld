@@ -16,9 +16,9 @@ module('Integration | Component | favorite-article-button', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#favorite-article-button onClick=onClick}}
+      <FavoriteArticleButton @onClick={{this.onClick}}>
         template block text
-      {{/favorite-article-button}}
+      </FavoriteArticleButton>
     `);
 
     await click('[data-test-favorite-article-button]');
@@ -39,9 +39,9 @@ module('Integration | Component | favorite-article-button', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#favorite-article-button class=classNames onClick=onClick}}
+      <FavoriteArticleButton class={{classNames}} @onClick={{this.onClick}}>
         template block text
-      {{/favorite-article-button}}
+      </FavoriteArticleButton>
     `);
 
     const buttonAssertion = assert.dom('[data-test-favorite-article-button]');
