@@ -1,13 +1,14 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import Service from '@ember/service';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | navigation-bar', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders signed out', async function(assert) {
-    await render(hbs`{{navigation-bar}}`);
+    await render(hbs`<NavigationBar />`);
 
     assert.dom('nav.navbar.navbar-light').exists();
     assert.dom('[data-test-navigation-bar-sign-in]').exists();
@@ -15,17 +16,18 @@ module('Integration | Component | navigation-bar', function(hooks) {
   });
 
   test('it renders signed in', async function(assert) {
-    const session = {
-      isLoggedIn: true,
-      user: {
-        username: 'joe blogs',
-        image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
-      },
-    };
-
-    this.set('session', session);
-
-    await render(hbs`{{navigation-bar session=session}}`);
+    this.owner.register(
+      'service:session',
+      Service.extend({
+        isLoggedIn: true,
+        // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
+        user: {
+          username: 'joe blogs',
+          image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
+        },
+      }),
+    );
+    await render(hbs`<NavigationBar />`);
 
     assert.dom('[data-test-navigation-bar-editor-new]').exists();
     assert.dom('[data-test-navigation-bar-sign-in]').doesNotExist();

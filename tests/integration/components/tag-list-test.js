@@ -15,7 +15,7 @@ module('Integration | Component | tag-list', function(hooks) {
     const store = this.owner.lookup('service:store');
     const querySpy = this.spy(store, 'query');
 
-    await render(hbs`{{tag-list}}`);
+    await render(hbs`<TagList />`);
 
     assert.dom('[data-test-tag]').exists({ count: 7 }, 'All the tags appear');
 

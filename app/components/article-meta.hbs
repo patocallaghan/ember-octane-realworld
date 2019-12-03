@@ -1,32 +1,35 @@
 <div class="article-meta" data-test-article-meta>
-  <ArticleAuthor @article={{article}} @tagName="" />
-  {{#if isLoggedIn}}
-    {{#if canEdit}}
-      <LinkTo @route="editor.article" @model={{article}} class="btn btn-sm btn-outline-secondary" data-test-edit-article-button>
+  <ArticleAuthor @article={{@article}} @tagName="" />
+  {{#if @isLoggedIn}}
+    {{#if @canEdit}}
+      <LinkTo @route="editor.article" @model={{@article}} class="btn btn-sm btn-outline-secondary"
+        data-test-edit-article-button>
         <i class="ion-edit"></i> &nbsp; Edit Article
       </LinkTo>
       &nbsp;&nbsp;
-      <button class="btn btn-sm btn-outline-danger" {{action onDeleteArticle article}} data-test-delete-article-button>
+      <button class="btn btn-sm btn-outline-danger" {{on "click" (fn @onDeleteArticle @article)}}
+        data-test-delete-article-button>
         <i class="ion-trash-a"></i> &nbsp; Delete Article
       </button>
     {{else}}
-      <FollowUserButton @following={{article.author.following}} @onClick={{action onFollowAuthor article.author}}>
-        {{if article.author.following "Unfollow" "Follow"}} {{article.author.id}}
+      <FollowUserButton @following={{@article.author.following}} @onClick={{fn @onFollowAuthor @article.author}}>
+        {{if @article.author.following "Unfollow" "Follow"}} {{@article.author.id}}
       </FollowUserButton>
       &nbsp;&nbsp;
-      <FavoriteArticleButton @class={{if article.favorited "btn-primary" "btn-outline-primary"}} @onClick={{action onFavoriteArticle article}}>
-        {{if article.favorited "Unfavorite" "Favorite"}} Post
-        <span class="counter" data-test-article-favorites-count>{{article.favoritesCount}}</span>
+      <FavoriteArticleButton class={{if @article.favorited "btn-primary" "btn-outline-primary"}}
+        @onClick={{fn @onFavoriteArticle @article}}>
+        {{if @article.favorited "Unfavorite" "Favorite"}} Post
+        <span class="counter" data-test-article-favorites-count>{{@article.favoritesCount}}</span>
       </FavoriteArticleButton>
     {{/if}}
   {{else}}
     <LinkTo @route="login" class="btn btn-sm btn-outline-secondary" data-test-follow-author-button-login>
-      Follow {{article.author.id}}
+      Follow {{@article.author.id}}
     </LinkTo>
     &nbsp;&nbsp;
     <LinkTo @route="login" class="btn btn-sm btn-outline-secondary" data-test-favorite-article-button-login>
       <i class="ion-heart"></i> &nbsp; Favorite Post
-      <span class="counter" data-test-article-favorites-count>{{article.favoritesCount}}</span>
+      <span class="counter" data-test-article-favorites-count>{{@article.favoritesCount}}</span>
     </LinkTo>
   {{/if}}
 </div>

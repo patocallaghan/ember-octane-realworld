@@ -1,44 +1,47 @@
-<div class="container">
-  <LinkTo @route="home" @query={{hash feed=null tag=null page=1}} class="navbar-brand">
-    conduit
-  </LinkTo>
-  <ul class="nav navbar-nav pull-xs-right">
-    <li class="nav-item">
-      <LinkTo @route="home" class="nav-link">
-        Home
-      </LinkTo>
-    </li>
-    {{#if session.isLoggedIn}}
-      <li class="nav-item" data-test-navigation-bar-editor-new>
-        <LinkTo @route="editor.new" class="nav-link">
-          <i class="ion-compose"></i>&nbsp;New Article
-        </LinkTo>
-      </li>
+<nav class="navbar navbar-light" ...attributes>
+  <div class="container">
+    <LinkTo @route="home" @query={{hash feed=null tag=null page=1}} class="navbar-brand">
+      conduit
+    </LinkTo>
+    <ul class="nav navbar-nav pull-xs-right">
       <li class="nav-item">
-        <LinkTo @route="settings" class="nav-link">
-          <i class="ion-gear-a"></i>&nbsp;Settings
+        <LinkTo @route="home" class="nav-link">
+          Home
         </LinkTo>
       </li>
-      <li class="nav-item">
-        <LinkTo @route="profile" @model={{session.user.username}} class="nav-link" data-test-currentUser-loggedIn={{true}}>
-          {{#if session.user.image}}
-            <img src={{session.user.image}} class="user-pic" alt="profile image for {{session.user.username}}"
-              data-test-currentUser-user-pic>
-          {{/if}}
-          {{session.user.username}}
-        </LinkTo>
-      </li>
-    {{else}}
-      <li class="nav-item" data-test-navigation-bar-sign-in>
-        <LinkTo @route="login" class="nav-link">
-          Sign In
-        </LinkTo>
-      </li>
-      <li class="nav-item">
-        <LinkTo @route="register" class="nav-link">
-          Sign Up
-        </LinkTo>
-      </li>
-    {{/if}}
-  </ul>
-</div>
+      {{#if this.session.isLoggedIn}}
+        <li class="nav-item" data-test-navigation-bar-editor-new>
+          <LinkTo @route="editor.new" class="nav-link">
+            <i class="ion-compose"></i>&nbsp;New Article
+          </LinkTo>
+        </li>
+        <li class="nav-item">
+          <LinkTo @route="settings" class="nav-link">
+            <i class="ion-gear-a"></i>&nbsp;Settings
+          </LinkTo>
+        </li>
+        <li class="nav-item">
+          <LinkTo @route="profile" @model={{this.session.user.username}} class="nav-link"
+            data-test-currentUser-loggedIn={{true}}>
+            {{#if this.session.user.image}}
+              <img src={{this.session.user.image}} class="user-pic"
+                alt="profile image for {{this.session.user.username}}" data-test-currentUser-user-pic>
+            {{/if}}
+            {{this.session.user.username}}
+          </LinkTo>
+        </li>
+      {{else}}
+        <li class="nav-item" data-test-navigation-bar-sign-in>
+          <LinkTo @route="login" class="nav-link">
+            Sign In
+          </LinkTo>
+        </li>
+        <li class="nav-item">
+          <LinkTo @route="register" class="nav-link">
+            Sign Up
+          </LinkTo>
+        </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>

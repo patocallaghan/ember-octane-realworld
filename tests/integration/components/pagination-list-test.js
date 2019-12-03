@@ -7,12 +7,13 @@ module('Integration | Component | pagination-list', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    const template = hbs`{{pagination-list
-      current=current
-      total=total
-      pageSize=pageSize
-      existingParams=existingParams
-    }}`;
+    const template = hbs`
+    <PaginationList
+      @current={{this.current}}
+      @total={{this.total}}
+      @pageSize={{this.pageSize}}
+      @existingParams={{this.existingParams}}
+    />`;
     this.setProperties({
       current: 2,
       total: 130,

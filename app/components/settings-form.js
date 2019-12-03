@@ -1,27 +1,29 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  image: '',
-  username: '',
-  bio: '',
-  email: '',
-  password: '',
+export default class SettingsForm extends Component {
+  image = this.args.image || '';
+  username = this.args.username || '';
+  bio = this.args.bio || '';
+  email = this.args.email || '';
+  password = this.args.password || '';
 
-  actions: {
-    submit() {
-      const { image, username, bio, email, password } = this;
+  @action
+  submit(event) {
+    event.preventDefault();
+    const { image, username, bio, email, password } = this;
 
-      return this.onSubmit({
-        image,
-        username,
-        bio,
-        email,
-        password,
-      });
-    },
+    return this.args.onSubmit({
+      image,
+      username,
+      bio,
+      email,
+      password,
+    });
+  }
 
-    change(field, event) {
-      return this.onChange(field, event.target.value);
-    },
-  },
-});
+  @action
+  change(field, event) {
+    return this.args.onChange(field, event.target.value);
+  }
+}

@@ -45,7 +45,7 @@ module('Integration | Component | article-meta', function(hooks) {
     });
 
     await render(
-      hbs`{{article-meta article=article onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
 
     assert
@@ -81,7 +81,7 @@ module('Integration | Component | article-meta', function(hooks) {
       .isNotVisible('Delete article button is not visible when user is logged out');
 
     await render(
-      hbs`{{article-meta article=article isLoggedIn=true onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @isLoggedIn={{true}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
 
     assert.dom('[data-test-follow-author-button]').includesText(`Follow ${article.author.id}`);
@@ -105,7 +105,7 @@ module('Integration | Component | article-meta', function(hooks) {
       .isNotVisible('Delete article button is not visible when user is logged in but cannot edit');
 
     await render(
-      hbs`{{article-meta article=article isLoggedIn=true canEdit=true onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @isLoggedIn={{true}} @canEdit={{true}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
 
     assert
@@ -147,7 +147,7 @@ module('Integration | Component | article-meta', function(hooks) {
       onDeleteArticle() {},
     });
     await render(
-      hbs`{{article-meta article=article isLoggedIn=true onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @isLoggedIn={{true}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
 
     await click('[data-test-follow-author-button]');
@@ -175,7 +175,7 @@ module('Integration | Component | article-meta', function(hooks) {
       onDeleteArticle() {},
     });
     await render(
-      hbs`{{article-meta article=article isLoggedIn=true onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @isLoggedIn={{true}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
 
     await click('[data-test-favorite-article-button]');
@@ -198,7 +198,7 @@ module('Integration | Component | article-meta', function(hooks) {
     });
 
     await render(
-      hbs`{{article-meta article=article isLoggedIn=true canEdit=true onFollowAuthor=onFollowAuthor onFavoriteArticle=onFavoriteArticle onDeleteArticle=onDeleteArticle}}`,
+      hbs`<ArticleMeta @article={{this.article}} @isLoggedIn={{true}} @canEdit={{true}} @onFollowAuthor={{this.onFollowAuthor}} @onFavoriteArticle={{this.onFavoriteArticle}} @onDeleteArticle={{this.onDeleteArticle}} />`,
     );
     await click('[data-test-delete-article-button]');
 

@@ -10,13 +10,16 @@
           </p>
           {{#if session.isLoggedIn}}
             {{#if (eq model.username session.user.username)}}
-              <LinkTo @route="settings" class="btn btn-sm btn-outline-secondary action-btn" data-test-edit-profile-button>
+              <LinkTo @route="settings" class="btn btn-sm btn-outline-secondary action-btn"
+                data-test-edit-profile-button>
                 <i class="ion-gear-a"></i> Edit Profile Settings
               </LinkTo>
             {{else}}
-              {{#follow-user-button data-test-follow-profile-button disabled=waitingForFollowing class="btn-outline-secondary action-btn" onClick=(perform (if model.following unFollowUser followUser) model)}}
+              <FollowUserButton @onClick={{perform (if model.following unFollowUser followUser) model}}
+                data-test-follow-profile-button disabled={{waitingForFollowing}}
+                class="btn-outline-secondary action-btn">
                 {{if model.following "Unfollow" "Follow"}} {{model.username}}
-              {{/follow-user-button}}
+              </FollowUserButton>
             {{/if}}
           {{else}}
             <LinkTo @route="login" class="btn btn-sm btn-outline-secondary action-btn" data-test-follow-profile-button>

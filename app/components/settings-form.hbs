@@ -1,7 +1,7 @@
-<form {{action "submit" on="submit" }}>
-  {{#if errors}}
+<form {{on "submit" this.submit}}>
+  {{#if @errors}}
     <ul class="error-messages">
-      {{#each errors key="@index" as | error |}}
+      {{#each @errors key="@index" as | error |}}
         <li data-test-settings-form-error-item>{{error.attribute}} {{error.message}}</li>
       {{/each}}
     </ul>
@@ -9,24 +9,25 @@
   <fieldset>
     <fieldset class="form-group">
       <Input class="form-control" @type="text" placeholder="URL of profile picture" data-test-settings-form-input-image
-        @value={{image}} @input={{action "change" "image"}} />
+        @value={{this.image}} @input={{fn this.change "image"}} />
     </fieldset>
     <fieldset class="form-group">
       <Input class="form-control form-control-lg" @type="text" placeholder="Your Name"
-        data-test-settings-form-input-username @value={{username}} @input={{action "change" "username"}} />
+        data-test-settings-form-input-username @value={{this.username}} @input={{fn this.change "username"}} />
     </fieldset>
     {{! template-lint-disable block-indentation }}
     <fieldset class="form-group">
       <Textarea class="form-control form-control-lg" @rows="8" placeholder="Short bio about you"
-        data-test-settings-form-input-bio @value={{bio}} @input={{action "change" "bio"}} />
+        data-test-settings-form-input-bio @value={{this.bio}} @input={{fn this.change "bio"}} />
       </fieldset>
     <fieldset class="form-group">
       <Input
         @type="text"
+        class="form-control form-control-lg"
         placeholder="Email"
         data-test-settings-form-input-email
-        @value={{email}}
-        @input={{action "change" "email"}}
+        @value={{this.email}}
+        @input={{fn this.change "email"}}
       />
     </fieldset>
     <fieldset class="form-group">
@@ -35,12 +36,12 @@
         @type="password"
         placeholder="Password"
         data-test-settings-form-input-password
-        @value={{password}}
-        @input={{action "change" "password"}}
+        @value={{this.password}}
+        @input={{fn this.change "password"}}
       />
     </fieldset>
     <button type="submit" class="btn btn-lg btn-primary pull-xs-right" data-test-settings-form-submit-button
-      disabled={{disableSubmit}}>
+      disabled={{@disableSubmit}}>
       Update Settings
     </button>
   </fieldset>
