@@ -2,11 +2,11 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-xs-12">
-        <ArticleForm @isNew={{model.isNew}} @errors={{model.errors}} @title={{readonly draftArticle.title}}
-          @description={{readonly draftArticle.description}} @body={{readonly draftArticle.body}}
-          @tags={{readonly draftArticle.tags}}
-          @disableSubmit={{and (not isValid) (not draftArticle.hasDirtyAttributes)}}
-          @onSubmit={{action "saveArticle" draftArticle}} @onChange={{action "changeAttr" draftArticle}} />
+        <ArticleForm @isNew={{@model.isNew}} @errors={{@model.errors}} @title={{readonly this.draftArticle.title}}
+          @description={{readonly this.draftArticle.description}} @body={{readonly this.draftArticle.body}}
+          @tags={{readonly this.draftArticle.tags}}
+          @disableSubmit={{and (not this.isValid) (not this.draftArticle.hasDirtyAttributes)}}
+          @onSubmit={{action "saveArticle" this.draftArticle}} @onChange={{action "changeAttr" this.draftArticle}} />
       </div>
     </div>
   </div>

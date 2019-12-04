@@ -1,18 +1,19 @@
 <div class="article-page">
   <div class="banner">
     <div class="container">
-      <h1>{{model.title}}</h1>
-      <ArticleMeta @article={{model}} @isLoggedIn={{session.isLoggedIn}}
-        @canEdit={{eq session.user.username model.author.username}} @onFavoriteArticle={{action "favoriteArticle"}}
-        @onDeleteArticle={{action "deleteArticle"}} @onFollowAuthor={{action "followAuthor"}} />
+      <h1>{{@model.title}}</h1>
+      <ArticleMeta @article={{@model}} @isLoggedIn={{this.session.isLoggedIn}}
+        @canEdit={{eq this.session.user.username @model.author.username}}
+        @onFavoriteArticle={{action "favoriteArticle"}} @onDeleteArticle={{action "deleteArticle"}}
+        @onFollowAuthor={{action "followAuthor"}} />
     </div>
   </div>
   <div class="container page">
     <div class="row article-content">
       <div class="col-md-12">
-        {{articleBody}}
+        {{this.articleBody}}
         <ul class="tag-list">
-          {{#each model.tagList key="id" as | tag |}}
+          {{#each @model.tagList key="id" as | tag |}}
             <li class="tag-default tag-pill tag-outline">{{tag.value}}</li>
           {{/each}}
         </ul>
@@ -20,23 +21,23 @@
     </div>
     <hr>
     <div class="article-actions">
-      <ArticleMeta @article={{model}} @isLoggedIn={{session.isLoggedIn}}
-        @canEdit={{eq session.user.username model.author.username}} @onFavoriteArticle={{action "favoriteArticle"}}
-        @onDeleteArticle={{action "deleteArticle"}} @onFollowAuthor={{action "followAuthor"}} />
+      <ArticleMeta @article={{@model}} @isLoggedIn={{this.session.isLoggedIn}}
+        @canEdit={{eq this.session.user.username @model.author.username}}
+        @onFavoriteArticle={{action "favoriteArticle"}} @onDeleteArticle={{action "deleteArticle"}}
+        @onFollowAuthor={{action "followAuthor"}} />
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-        {{#if session.isLoggedIn}}
+        {{#if this.session.isLoggedIn}}
           <form class="card comment-form" data-test-article-comment-form
-            {{action "createComment" model newComment on="submit" }}>
+            {{action "createComment" @model this.newComment on="submit" }}>
             {{! template-lint-disable block-indentation }}
             <div class="card-block">
-              <Textarea class="form-control" placeholder="Write a comment..." @rows="3" @value={{newComment}}
-                data-test-article-comment-textarea />
-              </div>
+              <Textarea class="form-control" placeholder="Write a comment..." @rows="3" @value={{this.newComment}}
+                data-test-article-comment-textarea /> </div>
             <div class="card-footer">
               <img class="comment-author-img" alt="">
-              <button class="btn btn-sm btn-primary" type="submit" disabled={{not isNewCommentValid}}>
+              <button class="btn btn-sm btn-primary" type="submit" disabled={{not this.isNewCommentValid}}>
                 Post Comment
               </button>
             </div>
@@ -47,7 +48,7 @@
             this article.
           </p>
         {{/if}}
-        {{#each comments key="id" as | comment |}}
+        {{#each this.comments key="id" as | comment |}}
           <div class="card" data-test-article-comment>
             <div class="card-block">
               <p class="card-text">{{comment.body}}</p>
@@ -59,7 +60,7 @@
                 {{comment.author.username}}
               </LinkTo>
               <span class="date-posted">{{comment.createdAt}}</span>
-              {{#if (eq session.user.username comment.author.username)}}
+              {{#if (eq this.session.user.username comment.author.username)}}
                 <span class="mod-options">
                   {{!-- API doesn't seem to support editing comments.
                   <i class="ion-edit"></i>

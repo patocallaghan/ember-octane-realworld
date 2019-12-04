@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
-        <SettingsForm @errors={{user.errors}} @image={{readonly user.image}} @username={{readonly user.username}}
-          @bio={{readonly user.bio}} @email={{readonly user.email}} @password={{readonly user.password}}
-          @onSubmit={{action "saveSettings" user}} @onChange={{action "changeAttr" user}}
-          @disableSubmit={{not user.hasDirtyAttributes}} />
+        <SettingsForm @errors={{this.user.errors}} @image={{readonly this.user.image}}
+          @username={{readonly this.user.username}} @bio={{readonly this.user.bio}} @email={{readonly this.user.email}}
+          @password={{readonly this.user.password}} @onSubmit={{action "saveSettings" this.user}}
+          @onChange={{action "changeAttr" this.user}} @disableSubmit={{not this.user.hasDirtyAttributes}} />
         <hr>
         <button {{action "signOut"}} type="button" class="btn btn-outline-danger" data-test-settings-logout-button>
           Or click here to logout.
