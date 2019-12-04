@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
-export default DS.RESTSerializer.extend({
-  attrs: {
+export default class UserSerializer extends DS.RESTSerializer {
+  attrs = {
     token: {
       serialize: false,
     },
@@ -11,7 +11,7 @@ export default DS.RESTSerializer.extend({
     updatedAt: {
       serialize: false,
     },
-  },
+  };
 
   /**
    * Add the user ID when serializing the record.
@@ -19,7 +19,7 @@ export default DS.RESTSerializer.extend({
    * @param {*} snapshot
    */
   serialize(snapshot) {
-    const json = this._super(...arguments);
+    const json = super.serialize(...arguments);
     const {
       record: { id, password },
     } = snapshot;
@@ -38,5 +38,5 @@ export default DS.RESTSerializer.extend({
     json.id = id;
 
     return json;
-  },
-});
+  }
+}

@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
-export default DS.RESTSerializer.extend({
-  primaryKey: 'username',
+export default class ProfileSerializer extends DS.RESTSerializer {
+  primaryKey = 'username';
+
   normalizeFindRecordResponse(store, primaryModelClass, payload) {
     const { profile } = payload;
     const { username } = profile;
@@ -19,6 +20,6 @@ export default DS.RESTSerializer.extend({
       favoriteArticles: `${articlesURL}?favorited=${username}`,
     };
 
-    return this._super(...arguments);
-  },
-});
+    return super.normalizeFindRecordResponse(...arguments);
+  }
+}
