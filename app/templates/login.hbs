@@ -22,7 +22,7 @@
                 type="email"
                 class="form-control form-control-lg"
                 placeholder="Email"
-                value=email}}
+                value=this.email}}
           </fieldset>
           <fieldset class="form-group">
             {{input
@@ -30,7 +30,7 @@
                 type="password"
                 class="form-control form-control-lg"
                 placeholder="Password"
-                value=password}}
+                value=this.password}}
           </fieldset>
           <button data-test-login class="btn btn-lg btn-primary pull-xs-right" disabled={{this.logIn.isRunning}}>
             Sign In

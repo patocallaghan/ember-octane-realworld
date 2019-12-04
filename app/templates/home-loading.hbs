@@ -10,9 +10,9 @@
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
-            {{#if session.isLoggedIn}}
+            {{#if this.session.isLoggedIn}}
               <li class="nav-item">
-                <LinkTo @route="home" @query={{hash feed="your" page=1 tag=null}} class={{concat "nav-link " (unless feed disabled)}} data-test-feed="your">
+                <LinkTo @route="home" @query={{hash feed="your" page=1 tag=null}} class={{concat "nav-link " (unless this.feed this.disabled)}} data-test-feed="your">
                   Your Feed
                 </LinkTo>
               </li>
@@ -22,10 +22,10 @@
                 Global Feed
               </LinkTo>
             </li>
-            {{#if tag}}
+            {{#if this.tag}}
               <li class="nav-item">
-                <LinkTo @route="home" @query={{hash feed=null page=1 tag=tag}} class="nav-link" data-test-feed={{tag}}>
-                  {{tag}}
+                <LinkTo @route="home" @query={{hash feed=null page=1 tag=this.tag}} class="nav-link" data-test-feed={{this.tag}}>
+                  {{this.tag}}
                 </LinkTo>
               </li>
             {{/if}}

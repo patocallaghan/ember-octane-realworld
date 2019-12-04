@@ -10,10 +10,10 @@
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
-            {{#if session.isLoggedIn}}
+            {{#if this.session.isLoggedIn}}
               <li class="nav-item">
                 <LinkTo @route="home" @query={{hash feed="your" page=1 tag=null}}
-                  class={{concat "nav-link " (unless feed disabled)}} data-test-feed="your">
+                  class={{concat "nav-link " (unless this.feed this.disabled)}} data-test-feed="your">
                   Your Feed
                 </LinkTo>
               </li>
@@ -23,22 +23,23 @@
                 Global Feed
               </LinkTo>
             </li>
-            {{#if tag}}
+            {{#if this.tag}}
               <li class="nav-item">
-                <LinkTo @route="home" @query={{hash feed=null page=1 tag=tag}} class="nav-link" data-test-feed={{tag}}>
-                  {{tag}}
+                <LinkTo @route="home" @query={{hash feed=null page=1 tag=this.tag}} class="nav-link"
+                  data-test-feed={{this.tag}}>
+                  {{this.tag}}
                 </LinkTo>
               </li>
             {{/if}}
           </ul>
         </div>
-        {{#each model.articles as |article|}}
-          <FeedItem @isLoggedIn={{session.isLoggedIn}} @article={{article}}
+        {{#each @model.articles as |article|}}
+          <FeedItem @isLoggedIn={{this.session.isLoggedIn}} @article={{article}}
             @onFavoriteArticle={{action "favoriteArticle"}} />
         {{/each}}
         <nav>
-          <PaginationList @current={{page}} @total={{model.meta.articlesCount}} @pageSize={{model.meta.pageSize}}
-            @existingParams={{hash feed=feed tag=tag}} />
+          <PaginationList @current={{this.page}} @total={{@model.meta.articlesCount}} @pageSize={{@model.meta.pageSize}}
+            @existingParams={{hash feed=this.feed tag=this.tag}} />
         </nav>
       </div>
       <div class="col-md-3">

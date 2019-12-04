@@ -17,13 +17,14 @@
         {{/if}}
         <form {{action (perform this.register) on="submit"}}>
           <fieldset class="form-group">
-            <Input class="form-control form-control-lg" placeholder="Username" @value={{username}} />
+            <Input class="form-control form-control-lg" placeholder="Username" @value={{this.username}} />
           </fieldset>
           <fieldset class="form-group">
-            <Input class="form-control form-control-lg" @type="email" placeholder="Email" @value={{email}} />
+            <Input class="form-control form-control-lg" @type="email" placeholder="Email" @value={{this.email}} />
           </fieldset>
           <fieldset class="form-group">
-            <Input class="form-control form-control-lg" @type="password" placeholder="Password" @value={{password}} />
+            <Input class="form-control form-control-lg" @type="password" placeholder="Password"
+              @value={{this.password}} />
           </fieldset>
           <button class="btn btn-lg btn-primary pull-xs-right" disabled={{this.register.isRunning}}>
             Sign Up
