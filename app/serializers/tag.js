@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
-export default DS.RESTSerializer.extend({
-  primaryKey: 'value',
+export default class TagSerializer extends DS.RESTSerializer {
+  primaryKey = 'value';
 
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     const newPayload = {
@@ -12,6 +12,6 @@ export default DS.RESTSerializer.extend({
       }),
     };
 
-    return this._super(store, primaryModelClass, newPayload, id, requestType);
-  },
-});
+    return super.normalizeArrayResponse(store, primaryModelClass, newPayload, id, requestType);
+  }
+}
