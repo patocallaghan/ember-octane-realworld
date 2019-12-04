@@ -1,7 +1,7 @@
 import NewRoute from './new';
 
-export default NewRoute.extend({
+export default class EditorArticleRoute extends NewRoute {
   model({ slug }) {
     return this.store.findRecord('article', slug);
-  },
-});
+  }
+}

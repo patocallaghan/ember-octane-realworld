@@ -1,9 +1,10 @@
-import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  session: service(),
-  queryParams: {
+export default class HomeRoute extends Route {
+  @service session;
+
+  queryParams = {
     feed: {
       refreshModel: true,
     },
@@ -13,7 +14,7 @@ export default Route.extend({
     page: {
       refreshModel: true,
     },
-  },
+  };
 
   async model({ feed, page, tag }) {
     const NUMBER_OF_ARTICLES = 10;
@@ -32,5 +33,5 @@ export default Route.extend({
       articles.meta.pageSize = NUMBER_OF_ARTICLES;
       return { articles, meta: articles.meta };
     }
-  },
-});
+  }
+}
