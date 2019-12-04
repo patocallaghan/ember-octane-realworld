@@ -1,18 +1,16 @@
 import DS from 'ember-data';
 import config from '../config/environment';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
 
 const { errorsHashToArray, RESTAdapter } = DS;
 
-export default RESTAdapter.extend({
-  session: service(),
+export default class ApplicationAdapter extends RESTAdapter {
+  @service session;
 
-  host: config.API.host,
+  host = config.API.host;
+  namespace = 'api';
 
-  namespace: 'api',
-
-  headers: computed('session.token', function() {
+  get headers() {
     const headers = {};
 
     if (this.session.token) {
@@ -20,13 +18,13 @@ export default RESTAdapter.extend({
     }
 
     return headers;
-  }),
+  }
 
   handleResponse(status, headers, payload) {
     if (this.isInvalid(...arguments)) {
       payload.errors = errorsHashToArray(payload.errors);
     }
 
-    return this._super(...arguments);
-  },
-});
+    return super.handleResponse(...arguments);
+  }
+}

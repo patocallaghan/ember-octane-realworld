@@ -1,6 +1,6 @@
 import ApplicationAdapter from './application';
 
-export default ApplicationAdapter.extend({
+export default class UserAdapter extends ApplicationAdapter {
   /**
    * Returns the model name as it is, so we can pass in plural and singular versions of the name.
    * @override
@@ -8,7 +8,7 @@ export default ApplicationAdapter.extend({
    */
   pathForType(modelName) {
     return modelName;
-  },
+  }
 
   /**
    * URL for updating a user record uses a singular form of the model name and does not include the record ID. E.g. `/user` instead of `/users/<id>`
@@ -18,15 +18,16 @@ export default ApplicationAdapter.extend({
    * @param {Object} snapshot
    */
   urlForUpdateRecord(id, modelName, snapshot) {
-    return this._super(null, 'user', snapshot);
-  },
+    return super.urlForUpdateRecord(null, 'user', snapshot);
+  }
 
   followUser(userName) {
     const url = this.buildURL('user', userName) + '/follow';
     return this.ajax(url, 'POST');
-  },
+  }
+
   unFollowUser(userName) {
     const url = this.buildURL('user', userName) + '/follow';
     return this.ajax(url, 'DELETE');
-  },
-});
+  }
+}
