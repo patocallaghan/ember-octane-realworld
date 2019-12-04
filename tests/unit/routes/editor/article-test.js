@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import EditorNewRoute from 'realworld-ember/routes/editor/new';
+import EditorNewRoute from 'ember-octane-realworld/routes/editor/new';
 import test from 'ember-sinon-qunit/test-support/test';
 
 module('Unit | Route | editor/article', function(hooks) {

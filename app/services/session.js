@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import ENV from 'realworld-ember/config/environment';
+import ENV from 'ember-octane-realworld/config/environment';
 
 export const STORAGE_KEY = 'realworld.ember-classic.token';
 

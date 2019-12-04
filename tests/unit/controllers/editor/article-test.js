@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import EditorNewController from 'realworld-ember/controllers/editor/new';
+import EditorNewController from 'ember-octane-realworld/controllers/editor/new';
 
 module('Unit | Controller | editor/article', function(hooks) {
   setupTest(hooks);

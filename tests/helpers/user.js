@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from 'realworld-ember/services/session';
+import { STORAGE_KEY } from 'ember-octane-realworld/services/session';
 
 export const TOKEN = 'auth-token';
 

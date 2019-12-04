@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   const ENV = {
-    modulePrefix: 'realworld-ember',
+    modulePrefix: 'ember-octane-realworld',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',

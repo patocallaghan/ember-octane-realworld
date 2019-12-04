@@ -2,7 +2,7 @@ import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { formatDate } from 'realworld-ember/helpers/format-date';
+import { formatDate } from 'ember-octane-realworld/helpers/format-date';
 import test from 'ember-sinon-qunit/test-support/test';
 
 module('Integration | Component | article-meta', function(hooks) {

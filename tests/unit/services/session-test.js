@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import { setupLoggedInUser, setupLoggedOutUser } from 'realworld-ember/tests/helpers/user';
+import { setupLoggedInUser, setupLoggedOutUser } from 'ember-octane-realworld/tests/helpers/user';
 
 const STORAGE_KEY = 'realworld.ember-classic.token';
 

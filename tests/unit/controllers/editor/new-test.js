@@ -2,7 +2,7 @@ import { module } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 import EmberObject from '@ember/object';
-import { DraftArticle } from 'realworld-ember/controllers/editor/new';
+import { DraftArticle } from 'ember-octane-realworld/controllers/editor/new';
 
 module('Unit | Controller | editor/new', function(hooks) {
   setupTest(hooks);
