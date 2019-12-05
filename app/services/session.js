@@ -1,26 +1,27 @@
+import { tracked } from '@glimmer/tracking';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
 import ENV from 'ember-octane-realworld/config/environment';
 
-export const STORAGE_KEY = 'realworld.ember-classic.token';
+export const STORAGE_KEY = 'realworld.ember-octane.token';
 
-export default Service.extend({
-  store: service(),
-  token: null,
-  user: null,
+export default class SessionService extends Service {
+  @service store;
+
+  @tracked token;
+  @tracked user;
 
   initSession() {
     const storedToken = this.getStoredToken();
     if (storedToken) {
-      this.set('token', storedToken);
+      this.token = storedToken;
       return this.fetchUser();
     }
-  },
+  }
 
-  isLoggedIn: computed('token', function() {
+  get isLoggedIn() {
     return !!this.token;
-  }),
+  }
 
   register(username, email, password) {
     const user = this.store.createRecord('user', {
@@ -40,7 +41,7 @@ export default Service.extend({
           resolve(user);
         });
     });
-  },
+  }
 
   async logIn(email, password) {
     const login = await fetch(`${ENV.API.host}/api/users/login`, {
@@ -66,14 +67,14 @@ export default Service.extend({
         users: [userPayload.user],
       });
       this.setToken(userPayload.user.token);
-      this.set('user', this.store.peekRecord('user', userPayload.user.id));
+      this.user = this.store.peekRecord('user', userPayload.user.id);
       return this.user;
     }
-  },
+  }
 
   logOut() {
     this.removeToken();
-  },
+  }
 
   async fetchUser() {
     const { user } = await this.fetch('/user');
@@ -86,7 +87,7 @@ export default Service.extend({
       this.set('user', this.store.peekRecord('user', user.id));
       return this.user;
     }
-  },
+  }
 
   async fetch(url, method = 'GET') {
     const response = await fetch(`${ENV.API.host}/api${url}`, {
@@ -97,21 +98,21 @@ export default Service.extend({
     });
     const payload = await response.json();
     return payload;
-  },
+  }
 
   getStoredToken() {
     return localStorage.getItem(STORAGE_KEY);
-  },
+  }
 
   setToken(token) {
     this.set('token', token);
     localStorage.setItem(STORAGE_KEY, token);
-  },
+  }
 
   removeToken() {
     this.set('token', null);
     localStorage.removeItem(STORAGE_KEY);
-  },
+  }
 
   processLoginErrors(errors) {
     const loginErrors = [];
@@ -122,5 +123,5 @@ export default Service.extend({
       });
     });
     return loginErrors;
-  },
-});
+  }
+}

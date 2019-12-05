@@ -3,7 +3,7 @@ import { setupTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupLoggedInUser, setupLoggedOutUser } from 'ember-octane-realworld/tests/helpers/user';
 
-const STORAGE_KEY = 'realworld.ember-classic.token';
+const STORAGE_KEY = 'realworld.ember-octane.token';
 
 module('Unit | Service | session', function(hooks) {
   setupTest(hooks);
