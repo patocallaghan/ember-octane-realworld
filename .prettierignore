@@ -1,0 +1,9 @@
+# unconventional js
+script
+.circleci
+
+# dependencies
+/node_modules/
+
+dist
+tmp

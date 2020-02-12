@@ -1,0 +1,59 @@
+<div class="home-page">
+
+  <div class="banner">
+    <div class="container">
+      <h1 class="logo-font">conduit</h1>
+      <p>A place to share your knowledge.</p>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="feed-toggle">
+          <ul class="nav nav-pills outline-active">
+            {{#if this.session.isLoggedIn}}
+              <li class="nav-item">
+                <LinkTo @route="index" @query={{hash feed="your" tag=null page=1}} class="nav-link">Your Feed</LinkTo>
+              </li>
+            {{/if}}
+            <li class="nav-item">
+              {{#let (and (not this.tag) (not this.feed)) as |isGlobalFeed|}}
+                <LinkTo @route="index" @query={{hash feed=null tag=null page=1}} class="nav-link {{if isGlobalFeed "active"}}">
+                  Global Feed
+                </LinkTo>
+              {{/let}}
+            </li>
+            {{#if this.tag}}
+              <li class="nav-item">
+                <LinkTo @route="index" @query={{hash feed=null tag=this.tag}} class="nav-link">#{{this.tag}}</LinkTo>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+
+        {{#each this.model as |article|}}
+          <ArticlePreview @article={{article}}/>
+        {{else}}
+          <div class="article-preview">No articles are here... yet.</div>
+        {{/each}}
+
+        <Pagination
+          @total={{this.model.meta.articlesCount}}
+          @perPage={{10}}
+          @current={{this.page}}
+          @existingParams={{hash author=this.feed tag=this.tag}}
+        />
+      </div>
+
+      <div class="col-md-3">
+        <div class="sidebar">
+          <TagList />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

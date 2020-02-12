@@ -1,0 +1,33 @@
+{{#if (not this.article.isValid)}}
+  <ul class="error-messages">
+    {{#each this.article.errors as |error|}}
+      <li>{{error.attribute}} {{error.message}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+<form>
+  <fieldset>
+    <fieldset class="form-group">
+      <Input  type="text" class="form-control form-control-lg" placeholder="Article Title" @value={{this.article.title}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Input type="text" class="form-control" placeholder="What's this article about?" @value={{this.article.description}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Textarea class="form-control" rows="8" placeholder="Write your article (in markdown)" @value={{this.article.body}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Input type="text" class="form-control" placeholder="Enter tags" @value={{this.rawTagList}} {{on "keyup" this.processTags}} />
+      <div class="tag-list"></div>
+    </fieldset>
+    <button
+      class="btn btn-lg pull-xs-right btn-primary"
+      type="button"
+      disabled={{this.buttonIsDisabled}}
+      {{on "click" this.publishArticle}}
+    >
+      {{if this.isSaving "Saving" "Publish"}} Article
+    </button>
+  </fieldset>
+</form>

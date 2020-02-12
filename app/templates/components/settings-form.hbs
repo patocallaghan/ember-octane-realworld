@@ -1,0 +1,32 @@
+<h1 class="text-xs-center">Your Settings</h1>
+
+{{#if (not this.session.user.isValid)}}
+  <ul class="error-messages">
+    {{#each this.session.user.errors as |error|}}
+      <li>{{error.attribute}} {{error.message}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+<form>
+  <fieldset>
+    <fieldset class="form-group">
+      <Input class="form-control" type="text" placeholder="URL of profile picture" @value={{this.session.user.image}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Input class="form-control form-control-lg" type="text" placeholder="Your Name"  @value={{this.session.user.username}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Textarea class="form-control form-control-lg" rows="8" placeholder="Short bio about you" @value={{this.session.user.bio}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Input class="form-control form-control-lg" type="text" placeholder="Email" @value={{this.session.user.email}} />
+    </fieldset>
+    <fieldset class="form-group">
+      <Input class="form-control form-control-lg" type="password" placeholder="Password" @value={{this.session.user.password}} />
+    </fieldset>
+    <button class="btn btn-lg btn-primary pull-xs-right" disabled={{or (not this.session.user.hasDirtyAttributes) this.session.user.isSaving}} {{on "click" this.submit}} type="button">
+      Update Settings
+    </button>
+  </fieldset>
+</form>
