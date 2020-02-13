@@ -28,6 +28,9 @@ module('Unit | Adapter | comment', function(hooks) {
     assert.equal(adapter.buildURL('comment', null, snapshot), `${host}/api/articles/1/comments`);
 
     // Delete Record has an ID.
-    assert.equal(adapter.buildURL('comment', 'foo', snapshot), `${host}/api/articles/1/comments/foo`);
+    assert.equal(
+      adapter.buildURL('comment', 'foo', snapshot),
+      `${host}/api/articles/1/comments/foo`,
+    );
   });
 });

@@ -24,6 +24,9 @@ module('Acceptance | login', function(hooks) {
     await settled();
 
     assert.equal(currentURL(), '/', 'URL after login is Home');
-    assert.ok(find('[data-test-currentUser-loggedIn]').text.length, 'Found currentUser profile link');
+    assert.ok(
+      find('[data-test-currentUser-loggedIn]').text.length,
+      'Found currentUser profile link',
+    );
   });
 });

@@ -13,7 +13,10 @@ module('Unit | Controller | editor/new', function(hooks) {
     const controller = this.owner.lookup('controller:editor/new');
     const { draftArticle } = controller;
 
-    assert.ok(draftArticle instanceof DraftArticle, 'Should be an instance of `DraftArticle` class');
+    assert.ok(
+      draftArticle instanceof DraftArticle,
+      'Should be an instance of `DraftArticle` class',
+    );
   });
 
   test('`isValid` computed property returns a boolean, validating the dependent properties', function(assert) {
@@ -103,7 +106,11 @@ module('`Unit | Controller | editor/new | Class | DraftArticle', function() {
     draftArticle.set('initialState', {});
 
     assert.ok(typeof initialState === 'object', 'Should return an object by default');
-    assert.notEqual(initialState, draftArticle.initialState, 'Should support setting different value');
+    assert.notEqual(
+      initialState,
+      draftArticle.initialState,
+      'Should support setting different value',
+    );
   });
 
   test('`hasDirtyAttributes` computed property checks properties against `initialState` for dirty attibutes', async function(assert) {
@@ -112,7 +119,11 @@ module('`Unit | Controller | editor/new | Class | DraftArticle', function() {
     const model = EmberObject.create({ title: 'old title!' });
     const draftArticle = DraftArticle.create({ model });
 
-    assert.equal(draftArticle.title, draftArticle.initialState.title, 'Initial state of title should be as expected');
+    assert.equal(
+      draftArticle.title,
+      draftArticle.initialState.title,
+      'Initial state of title should be as expected',
+    );
     assert.notOk(draftArticle.hasDirtyAttributes, 'Should return false when there are no changes');
 
     /**
@@ -132,7 +143,11 @@ module('`Unit | Controller | editor/new | Class | DraftArticle', function() {
     });
     const draftArticle = DraftArticle.create({ model });
 
-    assert.equal(draftArticle.title, draftArticle.initialState.title, 'Initial state of title should be as expected');
+    assert.equal(
+      draftArticle.title,
+      draftArticle.initialState.title,
+      'Initial state of title should be as expected',
+    );
 
     /**
      * Set the new title.
@@ -162,6 +177,10 @@ module('`Unit | Controller | editor/new | Class | DraftArticle', function() {
 
     draftArticle.resetInitialState();
 
-    assert.notEqual(initialState, draftArticle.initialState, 'Initial state should be a different object');
+    assert.notEqual(
+      initialState,
+      draftArticle.initialState,
+      'Initial state should be a different object',
+    );
   });
 });

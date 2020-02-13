@@ -16,7 +16,10 @@ module('Unit | Route | editor/new', function(hooks) {
     route.session.set('token', true);
     route.beforeModel();
 
-    assert.notOk(transitionToStub.called, 'Transition should not have occurred when user is logged in');
+    assert.notOk(
+      transitionToStub.called,
+      'Transition should not have occurred when user is logged in',
+    );
 
     route.session.set('token', false);
     route.beforeModel();
@@ -75,8 +78,14 @@ module('Unit | Route | editor/new', function(hooks) {
 
       // When user wants save changes, abort transition.
 
-      assert.notOk(draftArticle.rollbackAttributes.called, 'Should not rollback attributes when user wants to save');
-      assert.ok(transition.abort.calledOnce, 'Transition abort should be called when user wants to save');
+      assert.notOk(
+        draftArticle.rollbackAttributes.called,
+        'Should not rollback attributes when user wants to save',
+      );
+      assert.ok(
+        transition.abort.calledOnce,
+        'Transition abort should be called when user wants to save',
+      );
     });
 
     test('Rolls back attributes when an article record does not have changed attributes', async function(assert) {
@@ -102,7 +111,10 @@ module('Unit | Route | editor/new', function(hooks) {
         draftArticle.rollbackAttributes.calledOnce,
         'Should rollback attributes when there are no changes - will unload a new record from the store',
       );
-      assert.notOk(confirmStub.called, 'User confirmation should not have been initiated when there are no changes.');
+      assert.notOk(
+        confirmStub.called,
+        'User confirmation should not have been initiated when there are no changes.',
+      );
     });
   });
 });

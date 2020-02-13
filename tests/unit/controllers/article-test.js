@@ -100,7 +100,11 @@ module('Unit | Controller | article', function(hooks) {
 
     controller.set('model', null);
 
-    assert.equal(controller.get('newComment'), '', 'should reset to the default when `model` changes');
+    assert.equal(
+      controller.get('newComment'),
+      '',
+      'should reset to the default when `model` changes',
+    );
   });
 
   test('`isNewCommentValid` validates the new comment', function(assert) {
@@ -109,11 +113,21 @@ module('Unit | Controller | article', function(hooks) {
     const controller = this.owner.lookup('controller:article');
     controller.set('model', article);
 
-    assert.equal(controller.get('newComment'), '', 'New comment should be an empty string by default');
-    assert.notOk(controller.get('isNewCommentValid'), 'New comment should be invalid because it is an empty string');
+    assert.equal(
+      controller.get('newComment'),
+      '',
+      'New comment should be an empty string by default',
+    );
+    assert.notOk(
+      controller.get('isNewCommentValid'),
+      'New comment should be invalid because it is an empty string',
+    );
 
     controller.set('newComment', '   ');
-    assert.notOk(controller.get('isNewCommentValid'), 'New comment should be invalid because it only has spaces');
+    assert.notOk(
+      controller.get('isNewCommentValid'),
+      'New comment should be invalid because it only has spaces',
+    );
 
     controller.set('newComment', ' a ');
     assert.ok(
@@ -141,7 +155,11 @@ module('Unit | Controller | article', function(hooks) {
       'Create a `comment` record with expected properties',
     );
     assert.ok(article.save.calledOnce, 'New `comment` record should be saved');
-    assert.equal(controller.get('newComment'), '', '`controller.newComment` should be reset to an empty string');
+    assert.equal(
+      controller.get('newComment'),
+      '',
+      '`controller.newComment` should be reset to an empty string',
+    );
   });
 
   test('`deleteComment` method deletes a comment record', async function(assert) {
@@ -178,7 +196,10 @@ module('Unit | Controller | article', function(hooks) {
 
     await controller.actions.favoriteArticle.call(controller, articleUnfavorited);
     assert.ok(articleUnfavorited.favorite.called, 'Favorite an unfavorited article');
-    assert.notOk(articleUnfavorited.unfavorite.calledOnce, 'Do not unfavorite an unfavorited article');
+    assert.notOk(
+      articleUnfavorited.unfavorite.calledOnce,
+      'Do not unfavorite an unfavorited article',
+    );
   });
 
   test('`followAuthor` method follows/unfollows an author', async function(assert) {
@@ -202,7 +223,10 @@ module('Unit | Controller | article', function(hooks) {
 
     await controller.actions.followAuthor.call(controller, authorUnfollowed);
     assert.ok(authorUnfollowed.follow.called, 'Follow an author who is not followed');
-    assert.notOk(authorUnfollowed.unfollow.calledOnce, 'Do not unfollow an author who not followed');
+    assert.notOk(
+      authorUnfollowed.unfollow.calledOnce,
+      'Do not unfollow an author who not followed',
+    );
   });
 
   test('`deleteArticle` method deletes an article and transitions to home', async function(assert) {
@@ -216,7 +240,10 @@ module('Unit | Controller | article', function(hooks) {
 
     await controller.actions.deleteArticle.call(controller, article);
 
-    assert.ok(article.destroyRecord.calledOnce, 'Execute `article.destroyRecord` method to delete the record');
+    assert.ok(
+      article.destroyRecord.calledOnce,
+      'Execute `article.destroyRecord` method to delete the record',
+    );
     assert.ok(transitionToRouteStub.calledOnceWith('home'), 'Transition to `home` route');
   });
 });

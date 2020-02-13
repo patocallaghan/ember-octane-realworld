@@ -22,7 +22,9 @@ module('Integration | Component | pagination-list', function(hooks) {
     });
     await render(template);
 
-    assert.dom('[data-test-page-item-link]').exists({ count: 13 }, 'The correct number of pages are shown');
+    assert
+      .dom('[data-test-page-item-link]')
+      .exists({ count: 13 }, 'The correct number of pages are shown');
     assert.dom('[data-test-page-item].active').hasText('2', 'The correct page is selected');
 
     this.setProperties({

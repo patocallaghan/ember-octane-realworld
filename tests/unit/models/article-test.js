@@ -104,7 +104,11 @@ module('Unit | Model | article', function(hooks) {
       });
       const article = store.peekRecord('article', mockArticle.slug);
 
-      assert.equal(article.tagList.objectAt(0).value, 'foo', 'The `tagList` starts off with the expected strings');
+      assert.equal(
+        article.tagList.objectAt(0).value,
+        'foo',
+        'The `tagList` starts off with the expected strings',
+      );
 
       article.set('tags', ['bar']);
 

@@ -118,7 +118,10 @@ module('Acceptance | profile', function(hooks) {
       await settled();
 
       otherUser.reload();
-      assert.notOk(otherUser.following, 'Clicking on unfollow button should unfollow the profile owner');
+      assert.notOk(
+        otherUser.following,
+        'Clicking on unfollow button should unfollow the profile owner',
+      );
     });
 
     test('favorite an article by the user', async function(assert) {

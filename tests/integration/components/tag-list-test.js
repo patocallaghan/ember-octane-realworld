@@ -23,6 +23,9 @@ module('Integration | Component | tag-list', function(hooks) {
      * Query for popular tags.
      * Using findAll would return a live array that would get populated with tags from articles, which may/may-not be popular tags.
      */
-    assert.ok(querySpy.calledOnceWithExactly('tag', {}), 'Should use `store.query` for popular tags.');
+    assert.ok(
+      querySpy.calledOnceWithExactly('tag', {}),
+      'Should use `store.query` for popular tags.',
+    );
   });
 });

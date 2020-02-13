@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
-import ENV from 'realworld-starter-kit/config/environment';
+import ENV from 'ember-octane-realworld/config/environment';
 
 export default class AuthorizedFetchService extends Service {
   @service('session') session;

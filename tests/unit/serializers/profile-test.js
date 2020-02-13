@@ -50,7 +50,11 @@ module('Unit | Serializer | profile', function(hooks) {
     articleAdapter.host = location.origin;
 
     const articlesURL = articleAdapter.buildURL('article');
-    const normalizedResponse = serializer.normalizeFindRecordResponse(store, primaryModelClass, payload);
+    const normalizedResponse = serializer.normalizeFindRecordResponse(
+      store,
+      primaryModelClass,
+      payload,
+    );
     const expectedResponse = {
       data: {
         id: profile.username,

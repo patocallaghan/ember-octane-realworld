@@ -27,6 +27,9 @@ module('Unit | Controller | home', function(hooks) {
 
     await controller.actions.favoriteArticle.call(controller, articleUnfavorited);
     assert.ok(articleUnfavorited.favorite.called, 'Favorite an unfavorited article');
-    assert.notOk(articleUnfavorited.unfavorite.calledOnce, 'Do not unfavorite an unfavorited article');
+    assert.notOk(
+      articleUnfavorited.unfavorite.calledOnce,
+      'Do not unfavorite an unfavorited article',
+    );
   });
 });

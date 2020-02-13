@@ -172,7 +172,9 @@ export default function() {
        */
       const { favorited } = params;
 
-      return schema.articles.all().filter(article => article.favorited && article.author.id !== favorited);
+      return schema.articles
+        .all()
+        .filter(article => article.favorited && article.author.id !== favorited);
     } else {
       const allArticles = schema.articles.all(),
         limit = parseInt(params.limit),

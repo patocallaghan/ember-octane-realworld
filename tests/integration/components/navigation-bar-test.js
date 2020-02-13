@@ -16,17 +16,14 @@ module('Integration | Component | navigation-bar', function(hooks) {
   });
 
   test('it renders signed in', async function(assert) {
-    this.owner.register(
-      'service:session',
-      Service.extend({
-        isLoggedIn: true,
-        // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-        user: {
-          username: 'joe blogs',
-          image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
-        },
-      }),
-    );
+    class Session extends Service {
+      isLoggedIn = true;
+      user = {
+        username: 'joe blogs',
+        image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
+      };
+    }
+    this.owner.register('service:session', Session);
     await render(hbs`<NavigationBar />`);
 
     assert.dom('[data-test-navigation-bar-editor-new]').exists();

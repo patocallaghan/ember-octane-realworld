@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 const { errorsHashToArray, RESTAdapter } = DS;
 import { inject as service } from '@ember/service';
-import ENV from 'realworld-starter-kit/config/environment';
+import ENV from 'ember-octane-realworld/config/environment';
 
 export default class ApplicationAdapter extends RESTAdapter {
   @service('session') session;
