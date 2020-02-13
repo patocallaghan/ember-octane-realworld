@@ -49,8 +49,6 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
     ENV.APP.apiHost = '';
-    // Enable mocking by removing the host
-    ENV.API.host = '';
   }
 
   // if (environment === 'production') {

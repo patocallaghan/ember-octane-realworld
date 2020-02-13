@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application';
-import ENV from 'realworld-starter-kit/config/environment';
+import ENV from 'ember-octane-realworld/config/environment';
 
 export default class UserAdapter extends ApplicationAdapter {
   urlForUpdateRecord() {
