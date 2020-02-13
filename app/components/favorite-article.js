@@ -11,7 +11,7 @@ export default class FavoriteArticleComponent extends Component {
     if (this.session.isLoggedIn) {
       this.args.article[operation]();
     } else {
-      this.router.transitionTo('sign-in');
+      this.router.transitionTo('login');
     }
   }
 }

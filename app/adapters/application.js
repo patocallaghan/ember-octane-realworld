@@ -14,9 +14,12 @@ export default class ApplicationAdapter extends RESTAdapter {
 
   handleResponse(status, headers, payload) {
     if (this.isInvalid(...arguments)) {
+      if (typeof payload === 'string') {
+        payload = JSON.parse(payload);
+      }
       payload.errors = errorsHashToArray(payload.errors);
     }
 
-    return super.handleResponse(...arguments);
+    return super.handleResponse(status, headers, payload);
   }
 }

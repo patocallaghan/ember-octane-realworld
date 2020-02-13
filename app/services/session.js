@@ -8,12 +8,9 @@ export default class SessionService extends Service {
   @service('store') store;
   @service('authorizedFetch') authorizedFetch;
 
-  @tracked token;
-  @tracked user;
-
-  token = null;
-  user = null;
-  STORAGE_KEY = 'realworld.ember-octane.token';
+  @tracked token = null;
+  @tracked user = null;
+  static STORAGE_KEY = 'realworld.ember-octane.token';
 
   initSession() {
     let storedToken = this.getStoredToken();
@@ -89,12 +86,12 @@ export default class SessionService extends Service {
   }
 
   getStoredToken() {
-    return localStorage.getItem(this.STORAGE_KEY);
+    return localStorage.getItem(SessionService.STORAGE_KEY);
   }
 
   setToken(token) {
     this.token = token;
-    localStorage.setItem(this.STORAGE_KEY, token);
+    localStorage.setItem(SessionService.STORAGE_KEY, token);
   }
 
   removeToken() {

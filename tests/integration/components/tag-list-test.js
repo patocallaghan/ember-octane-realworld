@@ -1,9 +1,8 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import test from 'ember-sinon-qunit/test-support/test';
 
 module('Integration | Component | tag-list', function(hooks) {
   setupRenderingTest(hooks);

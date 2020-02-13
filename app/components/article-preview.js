@@ -11,7 +11,7 @@ export default class ArticlePreviewComponent extends Component {
     if (this.session.isLoggedIn) {
       article[operation]();
     } else {
-      this.router.transitionTo('sign-in');
+      this.router.transitionTo('login');
     }
   }
 }

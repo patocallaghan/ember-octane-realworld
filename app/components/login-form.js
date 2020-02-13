@@ -4,18 +4,13 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class LoginFormComponent extends Component {
-  @tracked email;
-  @tracked password;
-  @tracked user;
-  @tracked loginErrors;
+  @tracked email = '';
+  @tracked password = '';
+  @tracked user = null;
+  @tracked loginErrors = [];
 
   @service('session') session;
   @service('router') router;
-
-  email = '';
-  password = '';
-  user = null;
-  loginErrors = [];
 
   @action
   async submit(e) {
