@@ -1,5 +1,13 @@
 import { module, test } from 'qunit';
-import { click, visit, currentURL, settled, fillIn, triggerEvent, currentRouteName } from '@ember/test-helpers';
+import {
+  click,
+  visit,
+  currentURL,
+  settled,
+  fillIn,
+  triggerEvent,
+  currentRouteName,
+} from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupLoggedInUser } from '../helpers/user';
@@ -118,7 +126,11 @@ module('Acceptance | article', function(hooks) {
     await click('[data-test-delete-article-button]');
     await settled();
 
-    assert.equal(currentRouteName(), 'home', 'Expected to transition to index when article is deleted');
+    assert.equal(
+      currentRouteName(),
+      'home',
+      'Expected to transition to index when article is deleted',
+    );
   });
 
   test('post comment', async function(assert) {

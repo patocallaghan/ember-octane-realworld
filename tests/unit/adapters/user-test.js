@@ -8,7 +8,11 @@ module('Unit | Adapter | user', function(hooks) {
     assert.expect(1);
 
     const adapter = this.owner.lookup('adapter:user');
-    assert.ok(adapter.pathForType('fooBar'), 'fooBar', 'Expect `pathForType` to return the `modelName`');
+    assert.ok(
+      adapter.pathForType('fooBar'),
+      'fooBar',
+      'Expect `pathForType` to return the `modelName`',
+    );
   });
 
   test('`urlForUpdateRecord` method returns a URL for updating a record', function(assert) {

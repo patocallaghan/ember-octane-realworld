@@ -30,7 +30,11 @@ module('Integration | Component | feed item', function(hooks) {
 
     assert
       .dom('[data-test-article-author-image]')
-      .hasAttribute('src', 'https://static.productionready.io/images/smiley-cyrus.jpg', 'Image is default image');
+      .hasAttribute(
+        'src',
+        'https://static.productionready.io/images/smiley-cyrus.jpg',
+        'Image is default image',
+      );
 
     assert
       .dom(`[data-test-article-author-username="${article.author.id}"]`)
@@ -38,10 +42,14 @@ module('Integration | Component | feed item', function(hooks) {
 
     assert.dom('[data-test-article-date]').hasText(formatDate([date]), 'Date is correct');
 
-    assert.dom('[data-test-article-favorites-count]').hasText('9000', 'Number of favorites is correct');
+    assert
+      .dom('[data-test-article-favorites-count]')
+      .hasText('9000', 'Number of favorites is correct');
 
     assert.dom('[data-test-article-title]').hasText('Feed Item Title', 'Title is correct');
 
-    assert.dom('[data-test-article-description]').hasText('This is feed item description', 'Description is correct');
+    assert
+      .dom('[data-test-article-description]')
+      .hasText('This is feed item description', 'Description is correct');
   });
 });

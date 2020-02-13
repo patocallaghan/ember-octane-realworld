@@ -34,7 +34,10 @@ module('Integration | Component | article-form', function(hooks) {
 
     await fillIn('[data-test-article-form-input-title]', 'title!!!');
 
-    assert.ok(onChange.calledOnceWith('title', 'title!!!'), '`onChange` to be called with expected properties');
+    assert.ok(
+      onChange.calledOnceWith('title', 'title!!!'),
+      '`onChange` to be called with expected properties',
+    );
   });
 
   test('description input triggers change action', async function(assert) {
@@ -69,7 +72,10 @@ module('Integration | Component | article-form', function(hooks) {
 
     await fillIn('[data-test-article-form-input-body]', 'body!!!');
 
-    assert.ok(onChange.calledOnceWith('body', 'body!!!'), '`onChange` to be called with expected properties');
+    assert.ok(
+      onChange.calledOnceWith('body', 'body!!!'),
+      '`onChange` to be called with expected properties',
+    );
   });
 
   module('tags', function() {
@@ -95,7 +101,11 @@ module('Integration | Component | article-form', function(hooks) {
       );
 
       const newTags = onChange.args[0][1];
-      assert.notEqual(tags, newTags, 'New array of tags is and separate instance of source `tags` array');
+      assert.notEqual(
+        tags,
+        newTags,
+        'New array of tags is and separate instance of source `tags` array',
+      );
     });
 
     test('removed by triggering change action with an array of tags removed from the existing tags', async function(assert) {
@@ -113,11 +123,22 @@ module('Integration | Component | article-form', function(hooks) {
 
       await click('[data-test-article-form-tag-remove-button]');
 
-      assert.ok(onChange.calledOnceWith('tags', sinon.match.array), '`onChange` to be called with expected properties');
+      assert.ok(
+        onChange.calledOnceWith('tags', sinon.match.array),
+        '`onChange` to be called with expected properties',
+      );
 
       const newTags = onChange.args[0][1];
-      assert.notEqual(tags, newTags, 'New array of tags is and separate instance of source `tags` array');
-      assert.equal(newTags.length, 0, 'New array of tags should be empty when a tag is to be removed');
+      assert.notEqual(
+        tags,
+        newTags,
+        'New array of tags is and separate instance of source `tags` array',
+      );
+      assert.equal(
+        newTags.length,
+        0,
+        'New array of tags should be empty when a tag is to be removed',
+      );
     });
   });
 
@@ -146,14 +167,19 @@ module('Integration | Component | article-form', function(hooks) {
     this.set('onSubmit', onSubmit);
     this.set('disableSubmit', true);
 
-    await render(hbs`<ArticleForm @onSubmit={{this.onSubmit}} @disableSubmit={{this.disableSubmit}} />`);
+    await render(
+      hbs`<ArticleForm @onSubmit={{this.onSubmit}} @disableSubmit={{this.disableSubmit}} />`,
+    );
 
     assert
       .dom('[data-test-article-form-submit-button]')
       .isDisabled('Submit button is disabled when `disableSubmit` is `true`');
 
     await click('[data-test-article-form-submit-button]');
-    assert.notOk(onSubmit.called, '`onSubmit` should not be called when submit button is disabled.');
+    assert.notOk(
+      onSubmit.called,
+      '`onSubmit` should not be called when submit button is disabled.',
+    );
 
     this.set('disableSubmit', false);
 
@@ -193,10 +219,14 @@ module('Integration | Component | article-form', function(hooks) {
     ]);
     await settled();
 
-    assert.dom('[data-test-article-form-error-item]').exists({ count: 2 }, 'Display two error messages');
+    assert
+      .dom('[data-test-article-form-error-item]')
+      .exists({ count: 2 }, 'Display two error messages');
 
     errors.forEach(({ attribute, message }, index) => {
-      assert.dom(`[data-test-article-form-error-item]:nth-child(${index + 1})`).hasText(`${attribute} ${message}`);
+      assert
+        .dom(`[data-test-article-form-error-item]:nth-child(${index + 1})`)
+        .hasText(`${attribute} ${message}`);
     });
   });
 });

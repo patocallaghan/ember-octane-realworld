@@ -27,7 +27,11 @@ module('Unit | Service | session', function(hooks) {
       const user = await service.logIn(mockUser.email, mockUser.password);
       assert.equal(user.email, 'bob@example.com');
       assert.equal(user.token, 'auth-token');
-      assert.equal(localStorage.getItem(STORAGE_KEY), 'auth-token', 'Token is set in localStorage correctly');
+      assert.equal(
+        localStorage.getItem(STORAGE_KEY),
+        'auth-token',
+        'Token is set in localStorage correctly',
+      );
     });
   });
 

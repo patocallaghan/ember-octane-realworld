@@ -36,8 +36,12 @@ module('Acceptance | home', function(hooks) {
       'The correct number of feed tabs appear',
     );
     assert.dom('[data-test-feed="your"]').doesNotExist('Your feed is not shown when logged out');
-    assert.dom('.feed-toggle a.nav-link.active').hasText('Global Feed', 'The active tab has the correct text');
-    assert.dom('ul.pagination .page-item.active a').hasText('1', 'The active page is correct in the pagination list');
+    assert
+      .dom('.feed-toggle a.nav-link.active')
+      .hasText('Global Feed', 'The active tab has the correct text');
+    assert
+      .dom('ul.pagination .page-item.active a')
+      .hasText('1', 'The active page is correct in the pagination list');
   });
 
   test('clicking a page', async function(assert) {
@@ -61,7 +65,9 @@ module('Acceptance | home', function(hooks) {
       2,
       'The correct number of feed tabs appear',
     );
-    assert.dom('.feed-toggle a.nav-link.active').hasText('emberjs', 'The active feed toggle has the correct tag name');
+    assert
+      .dom('.feed-toggle a.nav-link.active')
+      .hasText('emberjs', 'The active feed toggle has the correct tag name');
   });
 
   test('clicking a page and tag', async function(assert) {
@@ -77,8 +83,12 @@ module('Acceptance | home', function(hooks) {
       2,
       'The correct number of feed tabs appear',
     );
-    assert.dom('.feed-toggle a.nav-link.active').hasText('training', 'The active feed has the correct tag name');
-    assert.dom('ul.pagination .page-item.active a').hasText('1', 'The correct page is active in the pagination list');
+    assert
+      .dom('.feed-toggle a.nav-link.active')
+      .hasText('training', 'The active feed has the correct tag name');
+    assert
+      .dom('ul.pagination .page-item.active a')
+      .hasText('1', 'The correct page is active in the pagination list');
   });
 
   test('resetting to the main list', async function(assert) {
@@ -121,7 +131,9 @@ module('Acceptance | home', function(hooks) {
       assert.dom('[data-test-feed="global"].active').exists('Global feed is selected by default');
       await click('[data-test-feed="your"]');
       assert.equal(currentURL(), '/?feed=your', 'Lands on the "Your feed" page');
-      assert.dom('[data-test-article-preview]').exists({ count: 1 }, 'One article is loaded on "Your feed"');
+      assert
+        .dom('[data-test-article-preview]')
+        .exists({ count: 1 }, 'One article is loaded on "Your feed"');
       assert.dom('[data-test-feed="your"].active').exists('Your feed is selected');
     });
   });

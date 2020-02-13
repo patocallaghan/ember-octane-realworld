@@ -1,5 +1,13 @@
 import { module, test } from 'qunit';
-import { find, fillIn, visit, currentURL, click, settled, currentRouteName } from '@ember/test-helpers';
+import {
+  find,
+  fillIn,
+  visit,
+  currentURL,
+  click,
+  settled,
+  currentRouteName,
+} from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupLoggedInUser, setupLoggedOutUser } from '../helpers/user';
@@ -99,7 +107,11 @@ module('Acceptance | settings', function(hooks) {
       await click('[data-test-settings-form-submit-button]');
 
       assert.dom('[data-test-settings-form-error-item]').exists();
-      assert.equal(currentRouteName(), 'settings', 'Should not navigate away from the page when there are errors');
+      assert.equal(
+        currentRouteName(),
+        'settings',
+        'Should not navigate away from the page when there are errors',
+      );
     });
   });
 });

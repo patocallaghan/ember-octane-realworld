@@ -10,7 +10,9 @@ module('Unit | Serializer | article', function(hooks) {
   test('it serializes records', function(assert) {
     assert.expect(2);
 
-    const record = run(() => this.owner.lookup('service:store').createRecord('article', { tagList: [] }));
+    const record = run(() =>
+      this.owner.lookup('service:store').createRecord('article', { tagList: [] }),
+    );
 
     const serializedRecord = record.serialize();
 
@@ -32,7 +34,13 @@ module('Unit | Serializer | article', function(hooks) {
         tagList: ['tag'],
       },
     ];
-    const result = serializer.normalizeArrayResponse(store, model, { articles, articlesCount: 1 }, undefined, 'foo');
+    const result = serializer.normalizeArrayResponse(
+      store,
+      model,
+      { articles, articlesCount: 1 },
+      undefined,
+      'foo',
+    );
     const expected = {
       data: [
         {
@@ -51,7 +59,11 @@ module('Unit | Serializer | article', function(hooks) {
       meta: { articlesCount: 1 },
     };
 
-    assert.deepEqual(result, expected, '`normalizeArrayResponse` returns expected normalized object');
+    assert.deepEqual(
+      result,
+      expected,
+      '`normalizeArrayResponse` returns expected normalized object',
+    );
   });
 
   test('`normalizeSingleResponse` normalizses a single payload', function(assert) {
@@ -64,7 +76,13 @@ module('Unit | Serializer | article', function(hooks) {
       slug: 'foo',
       tagList: ['tag'],
     };
-    const result = serializer.normalizeSingleResponse(store, model, { article }, article.slug, 'foo');
+    const result = serializer.normalizeSingleResponse(
+      store,
+      model,
+      { article },
+      article.slug,
+      'foo',
+    );
     const expected = {
       data: {
         id: 'foo',
@@ -80,7 +98,11 @@ module('Unit | Serializer | article', function(hooks) {
       included: [{ id: 'tag', type: 'tag', attributes: { value: 'tag' }, relationships: {} }],
     };
 
-    assert.deepEqual(result, expected, '`normalizeSingleResponse` returns expected normalized object');
+    assert.deepEqual(
+      result,
+      expected,
+      '`normalizeSingleResponse` returns expected normalized object',
+    );
   });
 
   test('`normalizeArticle` normalizes an article record', function(assert) {

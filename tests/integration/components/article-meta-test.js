@@ -50,7 +50,11 @@ module('Integration | Component | article-meta', function(hooks) {
 
     assert
       .dom('[data-test-article-author-image]')
-      .hasAttribute('src', 'https://static.productionready.io/images/smiley-cyrus.jpg', 'Image is default image');
+      .hasAttribute(
+        'src',
+        'https://static.productionready.io/images/smiley-cyrus.jpg',
+        'Image is default image',
+      );
 
     assert
       .dom(`[data-test-article-author-username="${article.author.id}"]`)
@@ -58,7 +62,9 @@ module('Integration | Component | article-meta', function(hooks) {
 
     assert.dom('[data-test-article-date]').hasText(formatDate([date]), 'Date is correct');
 
-    assert.dom('[data-test-follow-author-button-login]').includesText(`Follow ${article.author.id}`);
+    assert
+      .dom('[data-test-follow-author-button-login]')
+      .includesText(`Follow ${article.author.id}`);
 
     assert
       .dom('[data-test-follow-author-button]')
@@ -70,7 +76,9 @@ module('Integration | Component | article-meta', function(hooks) {
       .dom('[data-test-favorite-article-button]')
       .isNotVisible('Favorite article button is not visible when user is logged out');
 
-    assert.dom('[data-test-article-favorites-count]').hasText('9000', 'Number of favorites is correct');
+    assert
+      .dom('[data-test-article-favorites-count]')
+      .hasText('9000', 'Number of favorites is correct');
 
     assert
       .dom('[data-test-edit-article-button]')
@@ -110,7 +118,9 @@ module('Integration | Component | article-meta', function(hooks) {
 
     assert
       .dom('[data-test-follow-author-button-login]')
-      .isNotVisible('Follow author login button is not visible when user is logged in but can edit');
+      .isNotVisible(
+        'Follow author login button is not visible when user is logged in but can edit',
+      );
 
     assert
       .dom('[data-test-follow-author-button]')
@@ -118,7 +128,9 @@ module('Integration | Component | article-meta', function(hooks) {
 
     assert
       .dom('[data-test-favorite-article-button-login]')
-      .isNotVisible('Favorite article login button is not visible when user is logged in but can edit');
+      .isNotVisible(
+        'Favorite article login button is not visible when user is logged in but can edit',
+      );
 
     assert
       .dom('[data-test-favorite-article-button]')
@@ -153,7 +165,10 @@ module('Integration | Component | article-meta', function(hooks) {
     await click('[data-test-follow-author-button]');
     await settled();
 
-    assert.ok(this.get('article.author.following'), '`onFollowAuthor` action to be triggered with `author`');
+    assert.ok(
+      this.get('article.author.following'),
+      '`onFollowAuthor` action to be triggered with `author`',
+    );
     assert
       .dom('[data-test-follow-author-button]')
       .includesText(`Unfollow ${article.author.id}`, 'Button text is updated');
@@ -181,9 +196,16 @@ module('Integration | Component | article-meta', function(hooks) {
     await click('[data-test-favorite-article-button]');
     await settled();
 
-    assert.ok(this.get('article.favorited'), '`onFavoriteArticle` action to be triggered with `article`');
-    assert.dom('[data-test-favorite-article-button]').includesText(`Unfavorite Post`, 'Button text is updated');
-    assert.dom('[data-test-article-favorites-count]').hasText('9001', 'Number of favorites is correct');
+    assert.ok(
+      this.get('article.favorited'),
+      '`onFavoriteArticle` action to be triggered with `article`',
+    );
+    assert
+      .dom('[data-test-favorite-article-button]')
+      .includesText(`Unfavorite Post`, 'Button text is updated');
+    assert
+      .dom('[data-test-article-favorites-count]')
+      .hasText('9001', 'Number of favorites is correct');
   });
 
   test('clicking on `delete-article` button triggers `onDeleteArticle` method', async function(assert) {
@@ -202,6 +224,9 @@ module('Integration | Component | article-meta', function(hooks) {
     );
     await click('[data-test-delete-article-button]');
 
-    assert.ok(onDeleteArticle.calledOnceWith(article), '`onDeleteArticle` action to be triggered with `article`');
+    assert.ok(
+      onDeleteArticle.calledOnceWith(article),
+      '`onDeleteArticle` action to be triggered with `article`',
+    );
   });
 });
