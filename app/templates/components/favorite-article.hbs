@@ -1,5 +1,5 @@
-<button
-  class="btn btn-sm btn{{if (not @article.favorited) "-outline"}}-primary"
+<button class="btn btn-sm btn{{if (not @article.favorited) "-outline"}}-primary"
+  data-test-favorite-article-button={{if @article.favorited "favorited" "unfavorited"}}
   {{on "click" (fn this.favoriteArticle (if @article.favorited "unfavorite" "favorite"))}} type="button" ...attributes>
   <i class="ion-heart"></i>
   &nbsp;

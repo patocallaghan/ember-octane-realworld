@@ -3,31 +3,33 @@
     <LinkTo @route="index" @query={{hash author=null page=1 tag=null}} class="navbar-brand">conduit</LinkTo>
     <ul class="nav navbar-nav pull-xs-right">
       <li class="nav-item">
-        <LinkTo @route="index" class="nav-link">Home</LinkTo>
+        <LinkTo @route="index" class="nav-link" data-test-nav-home>Home</LinkTo>
       </li>
       {{#if this.session.isLoggedIn}}
         <li class="nav-item">
-          <LinkTo @route="editor.index" class="nav-link">
+          <LinkTo @route="editor.index" class="nav-link" data-test-nav-new-post>
             <i class="ion-compose"></i>&nbsp;New Post
           </LinkTo>
         </li>
         <li class="nav-item">
-          <LinkTo @route="settings" class="nav-link">
+          <LinkTo @route="settings" class="nav-link" data-test-nav-settings>
             <i class="ion-compose"></i>&nbsp;Settings
           </LinkTo>
         </li>
         <li class="nav-item">
-          <LinkTo @route="profile" @model={{this.session.user.username}} class="nav-link">{{this.session.user.username}}</LinkTo>
+          <LinkTo @route="profile" @model={{this.session.user.username}} class="nav-link" data-test-nav-username>
+            {{this.session.user.username}}
+          </LinkTo>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link" {{on "click" this.session.logOut}}>Log out</a>
+          <a href="" class="nav-link" {{on "click" this.session.logOut}} data-test-nav-log-out>Log out</a>
         </li>
       {{else}}
         <li class="nav-item">
-          <LinkTo @route="login" class="nav-link">Sign in</LinkTo>
+          <LinkTo @route="login" class="nav-link" data-test-nav-sign-in>Sign in</LinkTo>
         </li>
         <li class="nav-item">
-          <LinkTo @route="register" class="nav-link">Sign up</LinkTo>
+          <LinkTo @route="register" class="nav-link" data-test-nav-sign-up>Sign up</LinkTo>
         </li>
       {{/if}}
     </ul>

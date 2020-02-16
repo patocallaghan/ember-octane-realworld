@@ -1,8 +1,7 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, fillIn, triggerKeyEvent, click, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import test from 'ember-sinon-qunit/test-support/test';
 import sinon from 'sinon';
 
 module('Integration | Component | article-form', function(hooks) {

@@ -54,12 +54,9 @@ export default class ArticleFormComponent extends Component {
   async publishArticle() {
     try {
       await this.article.save();
+      this.router.transitionTo('articles.article', this.article);
     } catch {
       // Catch article validation exceptions
-    } finally {
-      if (this.router.currentRouteName === 'editor.index') {
-        this.router.transitionTo('editor.edit', this.article);
-      }
     }
   }
 }

@@ -1,13 +1,5 @@
 import { module, test } from 'qunit';
-import {
-  click,
-  visit,
-  currentURL,
-  settled,
-  fillIn,
-  triggerEvent,
-  currentRouteName,
-} from '@ember/test-helpers';
+import { click, visit, currentURL, settled, fillIn, currentRouteName } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupLoggedInUser } from '../helpers/user';
@@ -29,47 +21,36 @@ module('Acceptance | article', function(hooks) {
     });
   });
 
-  test('visiting /article/:slug', async function(assert) {
-    assert.expect(1);
-
+  test('visiting /articles/:slug', async function(assert) {
     const profile = await this.server.create('profile');
     const article = await this.server.create('article', {
       author: profile,
     });
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
 
-    assert.equal(currentURL(), `/article/${article.slug}`);
+    assert.equal(currentURL(), `/articles/${article.slug}`);
   });
 
   test('favorite article', async function(assert) {
-    assert.expect(2);
-
     const profile = await this.server.create('profile');
     const article = await this.server.create('article', {
       author: profile,
       favorited: false,
     });
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
+
     await click('[data-test-favorite-article-button]');
     await settled();
-    // Update the data that's been changed in this instance
-    article.reload();
-
     assert.ok(article.favorited, 'Expected article to be favorited');
 
     await click('[data-test-favorite-article-button]');
     await settled();
-    // Update the data that's been changed in this instance
-    article.reload();
-
     assert.notOk(article.favorited, 'Expected article to be unfavorited');
   });
 
   test('follow author', async function(assert) {
-    assert.expect(2);
-
     const profile = await this.server.create('profile', {
       following: false,
     });
@@ -78,39 +59,32 @@ module('Acceptance | article', function(hooks) {
       favorited: false,
     });
 
-    await visit(`/article/${article.slug}`);
-    await click('[data-test-follow-author-button]');
-    await settled();
-    // Update the data that's been changed in this instance
-    profile.reload();
-
-    assert.ok(profile.following, 'Expected author to be followed');
+    await visit(`/articles/${article.slug}`);
 
     await click('[data-test-follow-author-button]');
     await settled();
-    // Update the data that's been changed in this instance
-    profile.reload();
+    assert.dom('[data-test-follow-author-button]').hasTextContaining('Unfollow');
 
-    assert.notOk(profile.following, 'Expected author to be unfollowed');
+    await click('[data-test-follow-author-button]');
+    await settled();
+    assert.dom('[data-test-follow-author-button]').hasTextContaining('Follow');
   });
 
   test('edit article', async function(assert) {
-    assert.expect(1);
-
     const userProfile = await this.server.schema.profiles.findBy({ username: user.username });
     const article = await this.server.create('article', {
       author: userProfile,
     });
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
 
     await click('[data-test-edit-article-button]');
-
     assert.equal(
       currentRouteName(),
-      'editor.article',
+      'editor.edit',
       'Expect to transition to `editor.article` page to edit the article',
     );
+    assert.dom('[data-test-article-form-input-title]').hasValue(article.title);
   });
 
   test('delete article', async function(assert) {
@@ -121,14 +95,14 @@ module('Acceptance | article', function(hooks) {
       author: userProfile,
     });
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
 
     await click('[data-test-delete-article-button]');
     await settled();
 
     assert.equal(
       currentRouteName(),
-      'home',
+      'index',
       'Expected to transition to index when article is deleted',
     );
   });
@@ -142,17 +116,15 @@ module('Acceptance | article', function(hooks) {
     });
     const message = 'foo!';
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
 
     assert.dom('[data-test-article-comment]').doesNotExist();
 
     await fillIn('[data-test-article-comment-textarea]', message);
-    await triggerEvent('[data-test-article-comment-form]', 'submit');
-
-    const comments = this.server.schema.comments.where({ authorId: user.id });
-    assert.equal(comments.length, 1, 'Expect a server request to save 1 comment');
+    await click('[data-test-article-comment-button]');
 
     assert.dom('[data-test-article-comment]').exists({ count: 1 });
+    assert.dom('[data-test-article-comment-body]').hasText('foo!');
   });
 
   test('delete comment', async function(assert) {
@@ -171,7 +143,7 @@ module('Acceptance | article', function(hooks) {
       author: userProfile,
     });
 
-    await visit(`/article/${article.slug}`);
+    await visit(`/articles/${article.slug}`);
 
     assert.dom('[data-test-article-comment]').exists({ count: 1 });
 
