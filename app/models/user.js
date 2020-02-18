@@ -3,7 +3,7 @@ const { Model, attr } = DS;
 import { inject as service } from '@ember/service';
 
 export default class UserModel extends Model {
-  @service('authorizedFetch') authorizedFetch;
+  @service authorizedFetch;
 
   @attr('string') bio;
   @attr('string') email;

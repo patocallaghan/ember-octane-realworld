@@ -6,8 +6,8 @@ import { inject as service } from '@ember/service';
 export default class CommentsSectionComponent extends Component {
   @tracked isLoading = false;
 
-  @service('store') store;
-  @service('session') session;
+  @service store;
+  @service session;
 
   constructor() {
     super(...arguments);

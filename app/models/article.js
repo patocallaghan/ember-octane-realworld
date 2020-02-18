@@ -11,8 +11,7 @@ export default class ArticleModel extends Model {
   @tracked body;
   @tracked tagList;
 
-  @service('session') session;
-  @service('authorizedFetch') authorizedFetch;
+  @service session;
 
   @attr('string') title;
   @attr('string') description;

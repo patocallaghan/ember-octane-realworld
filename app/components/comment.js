@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class CommentComponent extends Component {
-  @service('session') session;
+  @service session;
 
   @action
   async deleteComment(e) {

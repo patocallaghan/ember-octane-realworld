@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class SettingsFormComponent extends Component {
-  @service('session') session;
+  @service session;
 
   willDestroy() {
     super.willDestroy(...arguments);

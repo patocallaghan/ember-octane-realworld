@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class TagListComponent extends Component {
-  @service('authorizedFetch') authorizedFetch;
+  @service authorizedFetch;
 
   @tracked tags = [];
   @tracked isLoading = false;

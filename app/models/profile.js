@@ -6,8 +6,7 @@ import { inject as service } from '@ember/service';
 export default class UserModel extends Model {
   @tracked articles;
 
-  @service('session') session;
-  @service('authorizedFetch') authorizedFetch;
+  @service session;
 
   @attr('string') bio;
   @attr('string') image;

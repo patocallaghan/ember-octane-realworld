@@ -9,8 +9,8 @@ export default class LoginFormComponent extends Component {
   @tracked user = null;
   @tracked loginErrors = [];
 
-  @service('session') session;
-  @service('router') router;
+  @service session;
+  @service router;
 
   @action
   async submit(e) {
