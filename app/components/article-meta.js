@@ -3,8 +3,8 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class SignUpComponent extends Component {
-  @service('session') session;
-  @service('router') router;
+  @service session;
+  @service router;
 
   @action
   async deleteArticle() {

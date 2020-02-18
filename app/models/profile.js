@@ -6,8 +6,7 @@ import { inject as service } from '@ember/service';
 export default class UserModel extends Model {
   @tracked articles;
 
-  @service('session') session;
-  @service('authorizedFetch') authorizedFetch;
+  @service session;
 
   @attr('string') bio;
   @attr('string') image;
@@ -33,7 +32,7 @@ export default class UserModel extends Model {
   }
 
   async followOperation(operation) {
-    let { profile } = await this.authorizedFetch.fetch(
+    let { profile } = await this.session.fetch(
       `/profiles/${this.id}/follow`,
       operation === 'follow' ? 'POST' : 'DELETE',
     );

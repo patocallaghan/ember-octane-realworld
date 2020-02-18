@@ -9,8 +9,8 @@ export default class RegisterFormComponent extends Component {
   @tracked password;
   @tracked user;
 
-  @service('session') session;
-  @service('router') router;
+  @service session;
+  @service router;
 
   username = '';
   email = '';

@@ -3,8 +3,8 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class ArticlePreviewComponent extends Component {
-  @service('session') session;
-  @service('router') router;
+  @service session;
+  @service router;
 
   @action
   favoriteArticle(article, operation) {

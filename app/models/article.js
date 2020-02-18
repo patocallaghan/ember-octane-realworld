@@ -11,8 +11,7 @@ export default class ArticleModel extends Model {
   @tracked body;
   @tracked tagList;
 
-  @service('session') session;
-  @service('authorizedFetch') authorizedFetch;
+  @service session;
 
   @attr('string') title;
   @attr('string') description;
@@ -46,7 +45,7 @@ export default class ArticleModel extends Model {
   }
 
   async favoriteOperation(operation) {
-    let { article } = await this.authorizedFetch.fetch(
+    let { article } = await this.session.fetch(
       `/articles/${this.id}/favorite`,
       operation === 'unfavorite' ? 'DELETE' : 'POST',
     );
