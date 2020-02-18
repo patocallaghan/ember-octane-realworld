@@ -14,12 +14,12 @@ export default class UserModel extends Model {
   @hasMany('article', { async: false, inverse: 'author' }) articles;
 
   async loadArticles() {
-    let articles = await this.store.query('article', { author: this.id });
+    let articles = await this.store.loadRecords('article', { author: this.id });
     this.articles = articles;
   }
 
   fetchFavorites() {
-    return this.store.query('article', { favorited: this.id });
+    return this.store.loadRecords('article', { favorited: this.id });
   }
 
   async follow() {

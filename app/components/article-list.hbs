@@ -1,5 +1,5 @@
-<div {{did-update (perform this.loadArticles) @feed @page @tag}}>
-  {{#if this.loadArticles.isRunning}}
+<div {{did-insert (perform this.network.loadArticles this.args)}} {{did-update (perform this.network.loadArticles this.args) @feed @page @tag}}>
+  {{#if (and (not this.articles.length) this.network.loadArticles.isRunning)}}
     Loading...
   {{else}}
     {{#each this.articles as |article|}}

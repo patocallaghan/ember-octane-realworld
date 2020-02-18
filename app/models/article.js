@@ -30,7 +30,7 @@ export default class ArticleModel extends Model {
   }
 
   loadComments() {
-    return this.store.query('comment', {
+    return this.store.loadRecords('comment', {
       article_id: this.id,
     });
   }

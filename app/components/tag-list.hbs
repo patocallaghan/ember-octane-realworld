@@ -1,9 +1,9 @@
-<p>Popular Tags</p>
-{{#if this.loadTags.isRunning}}
+<p {{did-insert (perform this.network.loadTags)}}>Popular Tags</p>
+{{#if (and this.network.loadTags.isRunning (not this.network.tags.length))}}
   <p>Loading...</p>
 {{else}}
   <div class="tag-list">
-    {{#each this.tags as |tag| }}
+    {{#each this.network.tags as |tag| }}
       <LinkTo @route="index" @query={{hash feed=null author=null tag=tag page=1}} class="tag-pill tag-default"
         data-test-tag={{tag}}>{{tag}}</LinkTo>
     {{/each}}

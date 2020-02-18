@@ -46,6 +46,7 @@
     "ember-concurrency": "^1.1.5",
     "ember-concurrency-decorators": "^1.0.0",
     "ember-data": "~3.16.0",
+    "ember-data-storefront": "^0.17.2",
     "ember-export-application-global": "^2.0.1",
     "ember-fetch": "^7.0.0",
     "ember-load-initializers": "^2.1.1",
