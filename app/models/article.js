@@ -1,24 +1,18 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-import { tracked } from '@glimmer/tracking';
 import marked from 'marked';
 import { htmlSafe } from '@ember/string';
 import { inject as service } from '@ember/service';
 
 export default class ArticleModel extends Model {
-  @tracked title;
-  @tracked description;
-  @tracked body;
-  @tracked tagList;
-
   @service session;
 
-  @attr('string') title;
-  @attr('string') description;
-  @attr('string') body;
+  @attr title;
+  @attr description;
+  @attr body;
   @attr('date') createdAt;
   @attr('date') updatedAt;
-  @attr('boolean') favorited;
-  @attr('number') favoritesCount;
+  @attr favorited;
+  @attr favoritesCount;
   @attr({ defaultValue: () => [] }) tagList;
 
   @belongsTo('profile') author;

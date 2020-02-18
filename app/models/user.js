@@ -4,12 +4,12 @@ import { inject as service } from '@ember/service';
 export default class UserModel extends Model {
   @service session;
 
-  @attr('string') bio;
-  @attr('string') email;
-  @attr('string') image;
-  @attr('string') password;
-  @attr('string') token;
-  @attr('string') username;
+  @attr bio;
+  @attr email;
+  @attr image;
+  @attr password;
+  @attr token;
+  @attr username;
   @attr('date') createdAt;
   @attr('date') updatedAt;
 

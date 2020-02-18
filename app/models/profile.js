@@ -1,15 +1,12 @@
 import Model, { attr, hasMany } from '@ember-data/model';
-import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class UserModel extends Model {
-  @tracked articles;
-
   @service session;
 
-  @attr('string') bio;
-  @attr('string') image;
-  @attr('boolean') following;
+  @attr bio;
+  @attr image;
+  @attr following;
 
   @hasMany('article', { async: false, inverse: 'author' }) articles;
 
