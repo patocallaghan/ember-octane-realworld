@@ -1,15 +1,9 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-import { tracked } from '@glimmer/tracking';
 import marked from 'marked';
 import { htmlSafe } from '@ember/string';
 import { inject as service } from '@ember/service';
 
 export default class ArticleModel extends Model {
-  @tracked title;
-  @tracked description;
-  @tracked body;
-  @tracked tagList;
-
   @service session;
 
   @attr('string') title;
