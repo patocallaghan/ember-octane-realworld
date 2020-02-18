@@ -4,13 +4,11 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class ArticleFormComponent extends Component {
-  @service('store') store;
-  @service('router') router;
+  @service store;
+  @service router;
 
-  @tracked
-  article = null;
-  @tracked
-  rawTagList = '';
+  @tracked article = null;
+  @tracked rawTagList = '';
 
   constructor() {
     super(...arguments);
