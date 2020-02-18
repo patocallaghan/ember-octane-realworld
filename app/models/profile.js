@@ -32,7 +32,7 @@ export default class UserModel extends Model {
   }
 
   async followOperation(operation) {
-    let { profile } = await this.authorizedFetch.fetch(
+    let { profile } = await this.session.fetch(
       `/profiles/${this.id}/follow`,
       operation === 'follow' ? 'POST' : 'DELETE',
     );

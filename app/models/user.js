@@ -3,7 +3,7 @@ const { Model, attr } = DS;
 import { inject as service } from '@ember/service';
 
 export default class UserModel extends Model {
-  @service authorizedFetch;
+  @service session;
 
   @attr('string') bio;
   @attr('string') email;
@@ -15,7 +15,7 @@ export default class UserModel extends Model {
   @attr('date') updatedAt;
 
   async fetchFeed(page = 1) {
-    let { articles } = await this.authorizedFetch.fetch(`/articles/feed?page=${page}`);
+    let { articles } = await this.session.fetch(`/articles/feed?page=${page}`);
     if (!articles.length) {
       return [];
     }

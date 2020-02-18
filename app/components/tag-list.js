@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class TagListComponent extends Component {
-  @service authorizedFetch;
+  @service session;
 
   @tracked tags = [];
   @tracked isLoading = false;
@@ -15,7 +15,7 @@ export default class TagListComponent extends Component {
 
   async loadTags() {
     this.isLoading = true;
-    let { tags } = await this.authorizedFetch.fetch('/tags');
+    let { tags } = await this.session.fetch('/tags');
     this.tags = tags;
     this.isLoading = false;
   }

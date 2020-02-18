@@ -6,7 +6,7 @@ import ENV from 'ember-octane-realworld/config/environment';
 
 export default class SessionService extends Service {
   @service store;
-  @service authorizedFetch;
+  @service session;
 
   @tracked token = null;
   @tracked user = null;
@@ -22,6 +22,17 @@ export default class SessionService extends Service {
 
   get isLoggedIn() {
     return !!this.token;
+  }
+
+  async fetch(url, method = 'GET') {
+    let response = await fetch(`${ENV.APP.apiHost}${url}`, {
+      method,
+      headers: {
+        Authorization: this.token ? `Token ${this.token}` : '',
+      },
+    });
+    let payload = await response.json();
+    return payload;
   }
 
   @action
@@ -77,7 +88,7 @@ export default class SessionService extends Service {
   }
 
   async fetchUser() {
-    let { user } = await this.authorizedFetch.fetch('/user');
+    let { user } = await this.session.fetch('/user');
     this.store.pushPayload({
       users: [user],
     });
