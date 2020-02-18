@@ -20,7 +20,7 @@ export default class ArticleListComponent extends Component {
     if (this.args.feed === 'your') {
       this.articles = yield this.session.user.fetchFeed(this.args.page);
     } else {
-      this.articles = this.store.query('article', {
+      this.articles = yield this.store.query('article', {
         limit: NUMBER_OF_ARTICLES,
         offset,
         tag: this.args.tag,
