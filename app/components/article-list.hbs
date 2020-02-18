@@ -1,6 +1,6 @@
 <div {{did-update (perform this.loadArticles) @feed @page @tag}}>
   {{#if this.loadArticles.isRunning}}
-    Loading...
+    <div class="article-preview">Loading...</div>
   {{else}}
     {{#each this.articles as |article|}}
       <ArticlePreview @article={{article}} />
