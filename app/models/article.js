@@ -6,13 +6,13 @@ import { inject as service } from '@ember/service';
 export default class ArticleModel extends Model {
   @service session;
 
-  @attr('string') title;
-  @attr('string') description;
-  @attr('string') body;
+  @attr title;
+  @attr description;
+  @attr body;
   @attr('date') createdAt;
   @attr('date') updatedAt;
-  @attr('boolean') favorited;
-  @attr('number') favoritesCount;
+  @attr favorited;
+  @attr favoritesCount;
   @attr({ defaultValue: () => [] }) tagList;
 
   @belongsTo('profile') author;

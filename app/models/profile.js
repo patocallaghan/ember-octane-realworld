@@ -4,9 +4,9 @@ import { inject as service } from '@ember/service';
 export default class UserModel extends Model {
   @service session;
 
-  @attr('string') bio;
-  @attr('string') image;
-  @attr('boolean') following;
+  @attr bio;
+  @attr image;
+  @attr following;
 
   @hasMany('article', { async: false, inverse: 'author' }) articles;
 
