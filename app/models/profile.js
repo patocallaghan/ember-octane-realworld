@@ -1,6 +1,5 @@
-import DS from 'ember-data';
+import Model, { attr, hasMany } from '@ember-data/model';
 import { tracked } from '@glimmer/tracking';
-const { Model, attr, hasMany } = DS;
 import { inject as service } from '@ember/service';
 
 export default class UserModel extends Model {

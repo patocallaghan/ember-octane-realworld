@@ -1,5 +1,5 @@
-import DS from 'ember-data';
-const { errorsHashToArray, RESTAdapter } = DS;
+import { errorsHashToArray } from '@ember-data/adapter/error';
+import RESTAdapter from '@ember-data/adapter/rest';
 import { inject as service } from '@ember/service';
 import ENV from 'ember-octane-realworld/config/environment';
 
