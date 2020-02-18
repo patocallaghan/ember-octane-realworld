@@ -33,13 +33,7 @@
             {{/if}}
           </ul>
         </div>
-        {{#each this.model as |article|}}
-          <ArticlePreview @article={{article}} />
-        {{else}}
-          <div class="article-preview">No articles are here... yet.</div>
-        {{/each}}
-        <Pagination @total={{this.model.meta.articlesCount}} @perPage={{10}} @current={{this.page}}
-          @existingParams={{hash author=this.feed tag=this.tag}} />
+        <ArticleList @feed={{this.feed}} @page={{this.page}} @tag={{this.tag}} />
       </div>
       <div class="col-md-3">
         <div class="sidebar">

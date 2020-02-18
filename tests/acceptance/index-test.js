@@ -1,10 +1,10 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, click } from '@ember/test-helpers';
+import { visit, currentURL, click, settled } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupLoggedInUser, setupLoggedOutUser } from '../helpers/user';
 
-module('Acceptance | home', function(hooks) {
+module('Acceptance | index', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
   setupLoggedOutUser(hooks);
@@ -36,8 +36,16 @@ module('Acceptance | home', function(hooks) {
     await this.server.createList('article', 20);
 
     await visit('/');
+    assert
+      .dom('[data-test-article-preview]')
+      .exists({ count: 10 }, 'The correct number of articles appear in the list');
     await click('[data-test-page-item-link="2"]');
-
+    assert
+      .dom('[data-test-article-preview]')
+      .exists(
+        { count: 10 },
+        'After changing page the correct number of articles appear in the list',
+      );
     assert.equal(currentURL(), '/?page=2');
     assert
       .dom('[data-test-page-item="2"]')
@@ -45,15 +53,24 @@ module('Acceptance | home', function(hooks) {
   });
 
   test('clicking a tag', async function(assert) {
+    await this.server.createList('article', 20);
+
     await visit('/');
+    assert
+      .dom('[data-test-article-preview]')
+      .exists({ count: 10 }, 'The correct number of articles appear in the list');
     await click('[data-test-tag="emberjs"]');
 
+    assert
+      .dom('[data-test-article-preview]')
+      .exists(
+        { count: 10 },
+        'After changing page the correct number of articles appear in the list',
+      );
     assert.equal(currentURL(), '/?tag=emberjs', 'The URL has the correct tag as a query param');
-    assert.equal(
-      this.element.querySelectorAll('.feed-toggle a.nav-link').length,
-      2,
-      'The correct number of feed tabs appear',
-    );
+    assert
+      .dom('.feed-toggle a.nav-link')
+      .exists({ count: 2 }, 'The correct number of feed tabs appear');
     assert.dom('[data-test-tab="tag"').hasClass('active', 'The tag feed toggle is active');
     assert
       .dom('[data-test-tab="tag"')
@@ -64,9 +81,18 @@ module('Acceptance | home', function(hooks) {
     await this.server.createList('article', 20);
 
     await visit('/?page=2&tag=emberjs');
+    assert
+      .dom('[data-test-article-preview]')
+      .exists({ count: 10 }, 'The correct number of articles appear in the list');
     await click('[data-test-tab="global"]');
 
     assert.equal(currentURL(), '/');
+    assert
+      .dom('[data-test-article-preview]')
+      .exists(
+        { count: 10 },
+        'After changing page the correct number of articles appear in the list',
+      );
     assert.dom('[data-test-tab="global"]').hasClass('active', 'The global tag is active');
     assert.dom('[data-test-page-item="1"]').hasClass('active', 'The first page is active');
   });
@@ -99,7 +125,11 @@ module('Acceptance | home', function(hooks) {
       assert
         .dom('[data-test-tab="global"]')
         .hasClass('active', 'Global feed is selected by default');
+      assert
+        .dom('[data-test-article-preview]')
+        .exists({ count: 10 }, 'The correct articles are shown in the list');
       await click('[data-test-tab="your"]');
+      await settled();
       assert.equal(currentURL(), '/?feed=your', 'Lands on the "Your feed" page');
       assert
         .dom('[data-test-article-preview]')
