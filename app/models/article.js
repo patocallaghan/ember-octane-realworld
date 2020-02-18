@@ -1,5 +1,4 @@
-import DS from 'ember-data';
-const { Model, attr, belongsTo, hasMany } = DS;
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { tracked } from '@glimmer/tracking';
 import marked from 'marked';
 import { htmlSafe } from '@ember/string';

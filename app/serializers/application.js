@@ -1,4 +1,3 @@
-import DS from 'ember-data';
-const { RESTSerializer } = DS;
+import RESTSerializer from '@ember-data/serializer/rest';
 
 export default class ApplicationSerializer extends RESTSerializer {}
