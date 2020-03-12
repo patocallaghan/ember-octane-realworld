@@ -2,13 +2,13 @@
 
 [![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
 [![Build Status](https://travis-ci.org/patocallaghan/ember-octane-realworld.svg?branch=master)](https://travis-ci.org/patocallaghan/ember-octane-realworld)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/fe3d8991-bb2c-443c-b64d-a8cd96fc1a64/deploy-status)](https://app.netlify.com/sites/mystifying-curran-3bcc82/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fe3d8991-bb2c-443c-b64d-a8cd96fc1a64/deploy-status)](https://ember-octane-realworld.netlify.com/)
 
 # Ember Octane RealWorld example app
 
 > ### Ember Octane codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) spec and API.
 
-### [Demo](https://mystifying-curran-3bcc82.netlify.com)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+### [Demo](https://ember-octane-realworld.netlify.com/)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
 # What is Ember Octane?
 
