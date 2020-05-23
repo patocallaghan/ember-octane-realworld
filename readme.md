@@ -1,3 +1,5 @@
+# THIS REPO IS NO LONGER MAINTAINED. IT WAS MERGED INTO [EMBER REALWORLD APP](https://github.com/gothinkster/ember-realworld/). See [this PR](https://github.com/gothinkster/ember-realworld/pull/99) for more details.
+
 # ![Ember Octane Example App](logo.png)
 
 [![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
